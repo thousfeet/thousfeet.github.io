@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+<meta name="referrer" content="never" /> ​​​​
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="There are multi-grained semantic units in natural languages such as word, phrase, sentence, document. Since we have seen how to learn a word representation in [link], in this post we will focus on phr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Phrase&amp;Sentence&amp;Document Representation">
+<meta property="og:url" content="http://yoursite.com/2020/06/18/semantic%20composition%20representation/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="There are multi-grained semantic units in natural languages such as word, phrase, sentence, document. Since we have seen how to learn a word representation in [link], in this post we will focus on phr">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/2020/06/18/semantic%20composition%20representation/notes-img/11.png">
+<meta property="og:image" content="http://yoursite.com/2020/06/18/semantic%20composition%20representation/notes-img/12.png">
+<meta property="og:image" content="http://yoursite.com/2020/06/18/semantic%20composition%20representation/notes-img/13.png">
+<meta property="og:image" content="http://yoursite.com/2020/06/18/semantic%20composition%20representation/notes-img/14.png">
+<meta property="og:image" content="http://yoursite.com/2020/06/18/semantic%20composition%20representation/notes-img/15.png">
+<meta property="og:image" content="http://yoursite.com/2020/06/18/semantic%20composition%20representation/notes-img/16.png">
+<meta property="og:image" content="http://yoursite.com/2020/06/18/semantic%20composition%20representation/notes-img/17.png">
+<meta property="og:image" content="http://yoursite.com/2020/06/18/semantic%20composition%20representation/notes-img/18.png">
+<meta property="og:image" content="http://yoursite.com/2020/06/18/semantic%20composition%20representation/notes-img/19.png">
+<meta property="article:published_time" content="2020-06-18T02:03:50.000Z">
+<meta property="article:modified_time" content="2020-06-18T02:53:42.293Z">
+<meta property="article:author" content="thousfeet">
+<meta property="article:tag" content="NLP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/06/18/semantic%20composition%20representation/notes-img/11.png">
+
+<link rel="canonical" href="http://yoursite.com/2020/06/18/semantic%20composition%20representation/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Phrase&Sentence&Document Representation | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/18/semantic%20composition%20representation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="thousfeet">
+      <meta itemprop="description" content="点一杯月光">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Phrase&Sentence&Document Representation
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-06-18 10:03:50 / 修改时间：10:53:42" itemprop="dateCreated datePublished" datetime="2020-06-18T10:03:50+08:00">2020-06-18</time>
+            </span>
+
+          
+            <span id="/2020/06/18/semantic%20composition%20representation/" class="post-meta-item leancloud_visitors" data-flag-title="Phrase&Sentence&Document Representation" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/06/18/semantic%20composition%20representation/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/06/18/semantic%20composition%20representation/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>There are multi-grained semantic units in natural languages such as word, phrase, sentence, document. Since we have seen how to learn a word representation in [link], in this post we will focus on phrase, sentence and document representation learning.</p>
+<h2 id="phrase-representation">Phrase Representation</h2>
+<p>Suppose a phrase <span class="math inline">\(p\)</span> is composed by two words <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span>. The phrase embedding <span class="math inline">\(p\)</span> is learned from its words' embedding, <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span>. Phrase representation methods can be divided into three categories: additive models, multiplicative models and others.</p>
+<h3 id="additive-models">Additive Models</h3>
+<ol type="1">
+<li><p>Vector addition：<span class="math inline">\(\boldsymbol{p}=\boldsymbol{u}+\boldsymbol{v}\)</span></p></li>
+<li><p>Weight the constituents differentially in the addition： <span class="math inline">\(\boldsymbol{p}=\alpha \boldsymbol{u}+\beta \boldsymbol{v}\)</span>（where 𝛼, 𝛽 are scalars）</p></li>
+<li><p>A linear function of the Cartesian product： <span class="math inline">\(\boldsymbol{p}=A \boldsymbol{u}+B \boldsymbol{v}\)</span>（where 𝐴, 𝐵∈<span class="math inline">\(ℝ^{(𝑑×𝑑)}\)</span> are matrices）</p></li>
+</ol>
+<h3 id="multiplicative-models">Multiplicative Models</h3>
+<ol type="1">
+<li><p>Element-wise multiplicative：<span class="math inline">\(\boldsymbol{p}=\boldsymbol{u}\)</span> о <span class="math inline">\(\boldsymbol{v}\)</span></p></li>
+<li><p>A linear function of the tensor product：<span class="math inline">\(\boldsymbol{p}=\boldsymbol{C u} \boldsymbol{v}\)</span>（𝑪∈<span class="math inline">\(ℝ^{(𝑑×𝑑×𝑑)}\)</span> is a tensor of rank 𝑑）</p></li>
+</ol>
+<p><img src="notes-img/11.png" /></p>
+<h3 id="considering-combination-rule">Considering Combination Rule</h3>
+<p>In the above models, all phrases use the same combination rules. However, language is much more complicated. Such as &quot;very good&quot; cannot be simply represented as &quot;apple tree&quot; by using the same linear combination of each single parts. So we should make composition matrices type-specific, which means phrases with different types use different composition matrices.</p>
+<p>Phrases can be divided by type as - Adjective-Noun: e.g., red apple, green tree - Noun-Noun: e.g., tomato noodle, apple tree - Verb-Object: e.g., have fun, eat apples - Other: e.g., take off, put on</p>
+<p>We use different parameters according to different types:</p>
+<ol type="1">
+<li>Additive</li>
+</ol>
+<p><span class="math display">\[\begin{array}{l}
+\boldsymbol{p}=\alpha_{r} \boldsymbol{u}+\beta_{r} \boldsymbol{v} \\
+\boldsymbol{p}=A_{r} \boldsymbol{u}+B_{r} \boldsymbol{v}
+\end{array}\]</span></p>
+<ol start="2" type="1">
+<li>Multiplicative</li>
+</ol>
+<p><span class="math display">\[\boldsymbol{p}=C_{r} \boldsymbol{u} \boldsymbol{v}\]</span></p>
+<ol start="3" type="1">
+<li>Others</li>
+</ol>
+<p><span class="math display">\[\boldsymbol{p}=\alpha_{r} \boldsymbol{u}+\beta_{r} \boldsymbol{v}+\gamma_{r} \boldsymbol{u} \circ \boldsymbol{v}\]</span></p>
+<p>So far we've only used some very simple models that connot fully capture the compositional meanings of phrases, because these models are proposed under the assumption that the meaning of a phrase can be represented by the linear combination of its parts. In addition, most of these models cannot capture the semantics of long text (i.e. a sentence) whose combination rules are much more complicated. Thus neural network is needed.</p>
+<h2 id="sentence-representation">Sentence Representation</h2>
+<h3 id="language-model">Language Model</h3>
+<p>Language Modeling is the task of predicting the upcoming word. It can be formulated as <span class="math inline">\(P\left(w_{n} | w_{1}, w_{2}, \cdots, w_{n-1}\right)\)</span>.</p>
+<p>The most famous language model is <strong>N-gram Model</strong>, which collects how frequent different n-grams are, and use these to predict next word. e.g. 4-gram model: <span class="math inline">\(P\left(w_{j} | \text {never to late to}\right)=\frac{\text {count}\left(\text {too late to } w_{j}\right)}{ \text { count(too late to } )}\)</span>. However, N-gram model needs to store count for all possible n-grams so model size is 𝑂(exp⁡(𝑛)). Another problem is traditional statistical models like N-gram will suffer the sparsity problem, which means it cannot handle new expressions.</p>
+<p>In order to solve these problem, we need to use neural architectures.</p>
+<p>Althought we can simply apply a MLP(Multi Layer Perceptron), but it is inefficient to adapt the change of order and unable to modify a variable length sentence as well. Therefore, the main types of neural network we use are Recurrent Neural Network(RNN) and Convolutional Neural Network(CNN).</p>
+<h3 id="recurrent-neural-network-rnn">Recurrent Neural Network (RNN)</h3>
+<p>RNN introduces a biological concept into neural networks, called sequential memory, which makes RNN can remember the past and its decisions are influenced by what it has learnt from the past. The memory stored in RNNs is changed dynamically during data processing.</p>
+<p>A RNN cell takes the input value <span class="math inline">\(x_i\)</span> and hidden state (memory) of last step <span class="math inline">\(h_{i-1}\)</span> as input, and update the hidden state vector like a single-layer neural network. Then it generates output of this time-step according to the hidden state. The hidden states share the same parameters, so RNN can process sequences with no limited length.</p>
+<p><img src="notes-img/12.png" /></p>
+<p>This picture shows how RNN works as a language model:</p>
+<p><img src="notes-img/13.png" /></p>
+<p>However, the recurrent computation is slow (the time complexity is O(n) ). Besides, it's difficult for RNN models to access information from many steps back.</p>
+<p>Further more, in many applications, like handwriting recognition, speech recognition, and machine translation, when we already have the whole sequence, we want to learn representations and make predictions depending not only on the information from the past, but on the information from the future. That is, we want to have an output depending on the whole input sequence.</p>
+<p>To address this issue, bidirectional RNNs are proposed, which puts two RNNs from opposite directions together. The input sequence is fed in normal time order for one network, and in reverse time order for another network. Then, the outputs of the two networks are concatenated at each time step as the joint hidden states for prediction.</p>
+<p><img src="notes-img/14.png" /></p>
+<p>In order to achieve better performance, similar to the neural network, we can stack multiple layers of Bidirectional RNNs together to form a complex deep bidirectional RNN.</p>
+<p><img src="notes-img/15.png" /></p>
+<p>However, because deep RNNs are quite computationally expensive to train, you don't usually see these stacked up to be more than 3 layers.</p>
+<h3 id="convolutional-neural-network-cnn">Convolutional Neural Network (CNN)</h3>
+<p>A CNN model can be divided into four layers: input layer, convolutional layer, max-pooling layer and non-linear layer.</p>
+<p>In the first layer the input layer, we need to transform words into input representations via word embeddings.</p>
+<p>Next, in the convolution layer we extract feature representation from input representation via a sliding convolving filter. Assuming the input window are <span class="math inline">\(h\)</span> width, each step of convolution operation extracts feature from a <span class="math inline">\(h\)</span>-gram phrase via a dot product operation. Then move to the next <span class="math inline">\(h\)</span>-gram phrase, until it goes through all possible <span class="math inline">\(h\)</span>-gram phrases.</p>
+<p>Then in third step, we apply a max-pooling operation over feature vector and take the maximum value <span class="math inline">\(q\)</span> as the feature corresponding to this particular filter.</p>
+<p>Finally, in the non-linear layer, we put the feature <span class="math inline">\(q\)</span> go through tanh to produce the output.</p>
+<p>As we have seen, the filter with <span class="math inline">\(h\)</span> can extract features of h-gram phrases. Due to the length of phrases is not fixed, it is impossible to capture the features of all phrases with only one filter. Therefore, we can apply multiple filters to capture different n-gram patterns in a sentence as the picture shows.</p>
+<p><img src="notes-img/16.png" /></p>
+<p>CNN has less parameters then RNN and it has better parallelization within sentences. But it can only extracting local and position-invariant features.</p>
+<h2 id="document-representation">Document Representation</h2>
+<p>Both RNN and CNN are not powerful enough to capture information from a long document which consists of hundreds of words.</p>
+<p>One way to solve this is using <strong>Hierarchical Structured Network</strong>.</p>
+<p>First, we split the document into several sentences. Then learn each sentence representation from word representation with an encoder, for example, CNN or RNN. Afterwards, we use another encoder to adaptively encode semantics of sentences and their inherent relations into document representations.</p>
+<p><img src="notes-img/17.png" /></p>
+<p>This model has a hierarchical structure that mirrors the hierarchical structure of documents, and outperforms standard RNN in many document modeling tasks.</p>
+<p>However, the problem of this model is that it treats each word in sentences and each sentence in documents equally. In practice, this is unreasonable. For example, in a sentence, conjunctions usually don't have much information, and in a document, usually the first and the last sentences have the most important information. Therefore, <strong>Hierarchical Attention Network</strong> was proposed.</p>
+<p>Compared to the model mentioned before, HAN introduces two levels of attention mechanisms, corresponding to the two level hierarchy in documents.</p>
+<p>The attention mechanisms enable HAN to attend differentially to more and less important content when constructing the document representation. For those more important parts, they will gain higher weights and for those less important parts, they will gain lower weights. So eventually those important parts of the documents will have a higher impact to the final representation.</p>
+<p><img src="notes-img/18.png" /></p>
+<p>Let's take a look at the Hierarchical Attention Network.</p>
+<p>At the word-level and the sentence-level, we apply the attention mechanism by regarding the word representation and the sentence representation as “values”, and a special context representation as “query”. Thus we get the scores for words and sentences, then we can calculate the sentence representation and the document representation by weighted sum.</p>
+<p><img src="notes-img/19.png" /></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/NLP/" rel="tag"># NLP</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/06/16/word%20representation/" rel="prev" title="Word Representation">
+      <i class="fa fa-chevron-left"></i> Word Representation
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#phrase-representation"><span class="nav-number">1.</span> <span class="nav-text">Phrase Representation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#additive-models"><span class="nav-number">1.1.</span> <span class="nav-text">Additive Models</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#multiplicative-models"><span class="nav-number">1.2.</span> <span class="nav-text">Multiplicative Models</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#considering-combination-rule"><span class="nav-number">1.3.</span> <span class="nav-text">Considering Combination Rule</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sentence-representation"><span class="nav-number">2.</span> <span class="nav-text">Sentence Representation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#language-model"><span class="nav-number">2.1.</span> <span class="nav-text">Language Model</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#recurrent-neural-network-rnn"><span class="nav-number">2.2.</span> <span class="nav-text">Recurrent Neural Network (RNN)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#convolutional-neural-network-cnn"><span class="nav-number">2.3.</span> <span class="nav-text">Convolutional Neural Network (CNN)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#document-representation"><span class="nav-number">3.</span> <span class="nav-text">Document Representation</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="thousfeet"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">thousfeet</p>
+  <div class="site-description" itemprop="description">点一杯月光</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">thousfeet</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : true,
+      appId      : '3IqmK7DaHDXlbtnr4LesniUw-gzGzoHsz',
+      appKey     : '2WXB4i1BEcwgiTF6CoPg5wio',
+      placeholder: "Comments here",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

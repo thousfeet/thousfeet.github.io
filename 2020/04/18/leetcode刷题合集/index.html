@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+<meta name="referrer" content="never" /> ​​​​
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="零零碎碎的 leetcode 题解记录，持续更新...">
+<meta property="og:type" content="article">
+<meta property="og:title" content="leetcode刷题合集">
+<meta property="og:url" content="http://yoursite.com/2020/04/18/leetcode%E5%88%B7%E9%A2%98%E5%90%88%E9%9B%86/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="零零碎碎的 leetcode 题解记录，持续更新...">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-04-18T14:20:50.000Z">
+<meta property="article:modified_time" content="2020-06-07T05:26:03.866Z">
+<meta property="article:author" content="thousfeet">
+<meta property="article:tag" content="leetcode">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/04/18/leetcode%E5%88%B7%E9%A2%98%E5%90%88%E9%9B%86/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>leetcode刷题合集 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/18/leetcode%E5%88%B7%E9%A2%98%E5%90%88%E9%9B%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="thousfeet">
+      <meta itemprop="description" content="点一杯月光">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          leetcode刷题合集
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-04-18 22:20:50" itemprop="dateCreated datePublished" datetime="2020-04-18T22:20:50+08:00">2020-04-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-06-07 13:26:03" itemprop="dateModified" datetime="2020-06-07T13:26:03+08:00">2020-06-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/04/18/leetcode%E5%88%B7%E9%A2%98%E5%90%88%E9%9B%86/" class="post-meta-item leancloud_visitors" data-flag-title="leetcode刷题合集" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/04/18/leetcode%E5%88%B7%E9%A2%98%E5%90%88%E9%9B%86/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/04/18/leetcode%E5%88%B7%E9%A2%98%E5%90%88%E9%9B%86/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>零零碎碎的 leetcode 题解记录，持续更新...</p>
+<a id="more"></a>
+<h2 id="按照高度重组队列思维">按照高度重组队列（思维）</h2>
+<blockquote>
+<p>Suppose you have a random list of people standing in a queue. Each person is described by a pair of integers (h, k), where h is the height of the person and k is the number of people in front of this person who have a height greater than or equal to h. Write an algorithm to reconstruct the queue. Note: The number of people is less than 1,100.</p>
+</blockquote>
+<blockquote>
+<p><strong>Example</strong> Input: [[7,0], [4,4], [7,1], [5,0], [6,1], [5,2]] Output: [[5,0], [7,0], [5,2], [6,1], [4,4], [7,1]]</p>
+</blockquote>
+<p>【题意】 一组人在排队，知道每个人的身高以及前面比他高(或等高)人的数量，返回按照这个排好的队列。</p>
+<p>【思路】 假设这些人从低到高站好，然后应该先排高的人，再插入低的人，因为高的人排好后相对位置是不会变的。 开始想的是做swap，看了discuss才发现就应该按照身高做groupby然后一组一组插入就好了。在高个排好之后，插入低个是可以直接插到x[1]这个位置的。</p>
+<p>【代码】 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    def reconstructQueue(self, people: List[List[int]]) -&gt; List[List[int]]:</span><br><span class="line">        res &#x3D; []</span><br><span class="line">        for k, g in itertools.groupby(sorted(people, reverse&#x3D;True), key&#x3D;lambda x: x[0]):</span><br><span class="line">            for person in sorted(g):</span><br><span class="line">                res.insert(person[1], person)</span><br><span class="line">        return res</span><br></pre></td></tr></table></figure></p>
+<h2 id="连线不交叉的数字匹配dp">连线不交叉的数字匹配（dp）</h2>
+<blockquote>
+<p>We write the integers of A and B (in the order they are given) on two separate horizontal lines. Now, we may draw connecting lines: a straight line connecting two numbers A[i] and B[j] such that: A[i] == B[j]; The line we draw does not intersect any other connecting (non-horizontal) line. Note that a connecting lines cannot intersect even at the endpoints: each number can only belong to one connecting line. Return the maximum number of connecting lines we can draw in this way.</p>
+</blockquote>
+<blockquote>
+<p><strong>Example 1:</strong> Input: A = [1,4,2], B = [1,2,4] Output: 2 Explanation: We can draw 2 uncrossed lines as in the diagram. We cannot draw 3 uncrossed lines, because the line from A[1]=4 to B[2]=4 will intersect the line from A[2]=2 to B[1]=2. <strong>Example 2:</strong> Input: A = [2,5,1,2,5], B = [10,5,2,1,5,2] Output: 3 <strong>Example 3:</strong> Input: A = [1,3,7,1,7,5], B = [1,9,2,5,1] Output: 2</p>
+</blockquote>
+<blockquote>
+<p><strong>Note:</strong> 1 &lt;= A.length &lt;= 500 1 &lt;= B.length &lt;= 500 1 &lt;= A[i], B[i] &lt;= 2000</p>
+</blockquote>
+<p>【题意】 给两组list 将相同数字的连线 线之间不能交叉 问最多能连几条线</p>
+<p>【思路】 开始想的是贪心能不能行 先以A为基准去B找 然后再反过来从B开始往A找 取个最大 但是这样会有问题 极端情况是A的起始和B的末端相同，B的起始和A的末端相同，这样不管哪种找法都会在一开始就把其他所有可能的连线都拦截掉 所以只能dp 想法是把所有相同的数字找出来 组成index的两两pair存起来 然后再以取或不取dp 后来看了Lee的解法 非常清晰优雅 虽然复杂度会比先把所有相同的找出来高一点点 但是会简洁特别多 思路有点像是字符串改写的那题 子问题分成：AB在此处匹配、直接跳过进入A的下一个、直接跳过进入B的下一个</p>
+<p>【代码】 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    def maxUncrossedLines(self, A: List[int], B: List[int]) -&gt; int:</span><br><span class="line">        dp &#x3D; collections.defaultdict(int)</span><br><span class="line">        for i in range(len(A)):</span><br><span class="line">            for j in range(len(B)):</span><br><span class="line">                dp[i,j] &#x3D; max(dp[i-1,j-1]+(A[i]&#x3D;&#x3D;B[j]), dp[i,j-1], dp[i-1,j])</span><br><span class="line">        return dp[len(A)-1, len(B)-1]</span><br></pre></td></tr></table></figure></p>
+<h2 id="循环列表的最大子串和数学trick">循环列表的最大子串和（数学trick）</h2>
+<blockquote>
+<ol start="918" type="1">
+<li>Maximum Sum Circular Subarray Given a circular array C of integers represented by A, find the maximum possible sum of a non-empty subarray of C. Here, a circular array means the end of the array connects to the beginning of the array. (Formally, C[i] = A[i] when 0 &lt;= i &lt; A.length, and C[i+A.length] = C[i] when i &gt;= 0.) Also, a subarray may only include each element of the fixed buffer A at most once. (Formally, for a subarray C[i], C[i+1], ..., C[j], there does not exist i &lt;= k1, k2 &lt;= j with k1 % A.length = k2 % A.length.)</li>
+</ol>
+</blockquote>
+<blockquote>
+<p><strong>Example 1:</strong> Input: [1,-2,3,-2] Output: 3 Explanation: Subarray [3] has maximum sum 3 <strong>Example 2:</strong> Input: [5,-3,5] Output: 10 Explanation: Subarray [5,5] has maximum sum 5 + 5 = 10 <strong>Example 3:</strong> Input: [3,-1,2,-1] Output: 4 Explanation: Subarray [2,-1,3] has maximum sum 2 + (-1) + 3 = 4 <strong>Example 4:</strong> Input: [3,-2,2,-3] Output: 3 Explanation: Subarray [3] and [3,-2,2] both have maximum sum 3 <strong>Example 5:</strong> Input: [-2,-3,-1] Output: -1 Explanation: Subarray [-1] has maximum sum -1</p>
+</blockquote>
+<blockquote>
+<p><strong>Note:</strong> -30000 &lt;= A[i] &lt;= 30000 1 &lt;= A.length &lt;= 30000</p>
+</blockquote>
+<p>【题意】 把列表前后绕成一个环 求这个里面的最大子串和</p>
+<p>【思路】 普通的最大子串和已经写烂了 这个唯一的不同就是前后一小段可以相加 开始想着先正常做一遍最大子串 然后限制开头位置、末尾位置求最大子串加起来 如果2个子串长度&gt;len就放弃，因为如果&gt;len相当于正常的最大子串已经会覆盖到了 结果发现有问题 在case[5,-3,5]的时候其实是不满足的 从前开始也是7从后开始也是7 看了hint是把列表重复两遍：C=[A,A] 这样能看到中间，但是这样没法限制max_len不超过原列表长度len，要抛弃前面还得维护一个动态窗口的样子，有点麻烦 然后看到解法是 把原列表的最大子串求出来、最小子串求出来，答案就是max(最大子串, 总和-最小子串)... 真的太机智了好吗！！太优雅了好吗！！ 最小子串也很好求，把原列表取负求最大就好了。唯一需要注意的就是不能总和=最小子串减出来空集了。</p>
+<p>【代码】 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    def maxSub(self, A):</span><br><span class="line">        ans,tmp &#x3D; -30007,0</span><br><span class="line">        for x in A:</span><br><span class="line">            tmp+&#x3D;x</span><br><span class="line">            ans &#x3D; max(ans, tmp)</span><br><span class="line">            if tmp&lt;0:</span><br><span class="line">                tmp&#x3D;0</span><br><span class="line">        return ans</span><br><span class="line">    </span><br><span class="line">    def maxSubarraySumCircular(self, A: List[int]) -&gt; int:</span><br><span class="line">        max_val &#x3D; self.maxSub(A)</span><br><span class="line">        B &#x3D; list(map(lambda x: -x, A))</span><br><span class="line">        min_val &#x3D; -self.maxSub(B)</span><br><span class="line">        return max(max_val,sum(A)-min_val) if sum(A)!&#x3D;min_val else max_val</span><br></pre></td></tr></table></figure></p>
+<h2 id="从两端取卡k次的最大和前缀和">从两端取卡k次的最大和（前缀和）</h2>
+<blockquote>
+<ol start="5393" type="1">
+<li>Maximum Points You Can Obtain from Cards There are several cards arranged in a row, and each card has an associated number of points The points are given in the integer array cardPoints. In one step, you can take one card from the beginning or from the end of the row. You have to take exactly k cards. Your score is the sum of the points of the cards you have taken. Given the integer array cardPoints and the integer k, return the maximum score you can obtain.</li>
+</ol>
+</blockquote>
+<blockquote>
+<p><strong>Example 1:</strong> Input: cardPoints = [1,2,3,4,5,6,1], k = 3 Output: 12 Explanation: After the first step, your score will always be 1. However, choosing the rightmost card first will maximize your total score. The optimal strategy is to take the three cards on the right, giving a final score of 1 + 6 + 5 = 12. <strong>Example 2:</strong> Input: cardPoints = [2,2,2], k = 2 Output: 4 Explanation: Regardless of which two cards you take, your score will always be 4. <strong>Example 3:</strong> Input: cardPoints = [9,7,7,9,7,7,9], k = 7 Output: 55 Explanation: You have to take all the cards. Your score is the sum of points of all cards. <strong>Example 4:</strong> Input: cardPoints = [1,1000,1], k = 1 Output: 1 Explanation: You cannot take the card in the middle. Your best score is 1. <strong>Example 5</strong> Input: cardPoints = [1,79,80,1,1,1,200,1], k = 3 Output: 202</p>
+</blockquote>
+<blockquote>
+<p>Constraints: 1 &lt;= cardPoints.length &lt;= 10^5 1 &lt;= cardPoints[i] &lt;= 10^4 1 &lt;= k &lt;= cardPoints.length</p>
+</blockquote>
+<p>【题意】 一组卡片，每次能从头或从尾取一张，问取k次能得到所有卡片的最大和</p>
+<p>【思路】 开始想到就是dp 维护[l][r][k]的情况 dfs搜 然后OOM 于是改成dict 然后TLE.... 然而事实上，这k张卡只可能是数组的前面一段和后面一段 只是截断多少的问题 所以正确解法是 求出来前缀后缀和 然后遍历下前一截i后一截k-i就好了（）</p>
+<p>【代码】</p>
+<p>前缀后缀和的解法： <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    def maxScore(self, cardPoints: List[int], k: int) -&gt; int:</span><br><span class="line">        pre &#x3D; [0]</span><br><span class="line">        sub &#x3D; [0]</span><br><span class="line">        for x in cardPoints:</span><br><span class="line">            pre.append(x+pre[-1])</span><br><span class="line">        for x in cardPoints[::-1]:</span><br><span class="line">            sub.append(x+sub[-1])</span><br><span class="line">        </span><br><span class="line">        ans &#x3D; 0</span><br><span class="line">        for i in range(0,k+1):</span><br><span class="line">            ans &#x3D; max(ans, pre[i]+sub[k-i])</span><br><span class="line">        return ans</span><br></pre></td></tr></table></figure></p>
+<p>dp的解法（会T） <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    def __init__(self):</span><br><span class="line">        self.dp &#x3D; &#123;&#125;</span><br><span class="line">    </span><br><span class="line">    def take(self, card, l, r, k):</span><br><span class="line">        if (l,r,k) in self.dp: </span><br><span class="line">            return self.dp[(l,r,k)]</span><br><span class="line">        if k&#x3D;&#x3D;1:</span><br><span class="line">            self.dp[(l,r,k)] &#x3D; max(card[l], card[r])</span><br><span class="line">        else:</span><br><span class="line">            self.dp[(l,r,k)] &#x3D; max(card[l]+self.take(card,l+1,r,k-1), card[r]+self.take(card,l,r-1,k-1))</span><br><span class="line">        return self.dp[(l,r,k)]</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">    def maxScore(self, cardPoints: List[int], k: int) -&gt; int:</span><br><span class="line">        ans &#x3D; self.take(cardPoints, 0, len(cardPoints)-1, k)</span><br><span class="line">        return ans</span><br></pre></td></tr></table></figure></p>
+<h2 id="最少只青蛙叫优先队列">最少只青蛙叫（优先队列）</h2>
+<blockquote>
+<ol start="5390" type="1">
+<li>Minimum Number of Frogs Croaking</li>
+</ol>
+</blockquote>
+<blockquote>
+<p>Given the string croakOfFrogs, which represents a combination of the string &quot;croak&quot; from different frogs, that is, multiple frogs can croak at the same time, so multiple “croak” are mixed. Return the minimum number of different frogs to finish all the croak in the given string. A valid &quot;croak&quot; means a frog is printing 5 letters ‘c’, ’r’, ’o’, ’a’, ’k’ sequentially. The frogs have to print all five letters to finish a croak. If the given string is not a combination of valid &quot;croak&quot; return -1.</p>
+</blockquote>
+<blockquote>
+<p><strong>Example 1:</strong> Input: croakOfFrogs = &quot;croakcroak&quot; Output: 1 Explanation: One frog yelling &quot;croak&quot; twice. <strong>Example 2:</strong> Input: croakOfFrogs = &quot;crcoakroak&quot; Output: 2 Explanation: The minimum number of frogs is two. The first frog could yell &quot;crcoakroak&quot;. The second frog could yell later &quot;crcoakroak&quot;. <strong>Example 3:</strong> Input: croakOfFrogs = &quot;croakcrook&quot; Output: -1 Explanation: The given string is an invalid combination of &quot;croak&quot; from different frogs. <strong>Example 4:</strong> Input: croakOfFrogs = &quot;croakcroa&quot; Output: -1</p>
+</blockquote>
+<blockquote>
+<p>Constraints: 1 &lt;= croakOfFrogs.length &lt;= 10^5 All characters in the string are: 'c', 'r', 'o', 'a' or 'k'.</p>
+</blockquote>
+<p>【题意】 青蛙叫一声是'croak'，叫完一声才可以接着叫下一声，问叫完整串自字符最少需要几只青蛙</p>
+<p>【思路】 用5个数组分别存c,r,o,a,k的下标，如果出现不是这5个字符的返回-1，如果5个数组长度不一致返回-1，如果在同一声青蛙叫中croak字符的顺序不对返回-1 排除了非法情况之后，就只要判断需要几只青蛙。方法是把每次叫完的index存下来，遍历到新的一声就判断有没有已经叫完的青蛙分配给它（新的一声开始的下标&lt;上一声结束的index）。10^5直接遍历青蛙列表会炸，所以用优先队列存。</p>
+<p>【代码】 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">from queue import PriorityQueue</span><br><span class="line"></span><br><span class="line">class Solution:</span><br><span class="line">    def minNumberOfFrogs(self, croakOfFrogs: str) -&gt; int:</span><br><span class="line">        croak &#x3D; [[],[],[],[],[]]</span><br><span class="line">        yell &#x3D; &quot;croak&quot;</span><br><span class="line">        for i in range(len(croakOfFrogs)):</span><br><span class="line">            x &#x3D; croakOfFrogs[i]</span><br><span class="line">            if x in yell:</span><br><span class="line">                croak[yell.index(x)].append(i)</span><br><span class="line">            else:</span><br><span class="line">                return -1</span><br><span class="line">            </span><br><span class="line">        leng &#x3D; len(croak[0])</span><br><span class="line">        for i in range(5):</span><br><span class="line">            if len(croak[i]) !&#x3D; leng:</span><br><span class="line">                return -1</span><br><span class="line">        </span><br><span class="line">        ans &#x3D; PriorityQueue()</span><br><span class="line">        for i in range(leng):</span><br><span class="line">            for j in range(1,5):</span><br><span class="line">                if croak[j][i]-croak[j-1][i]&lt;0:</span><br><span class="line">                    return -1</span><br><span class="line">            </span><br><span class="line">            if ans.empty():</span><br><span class="line">                ans.put(croak[4][i])</span><br><span class="line">            else:</span><br><span class="line">                frog &#x3D; ans.get()</span><br><span class="line">                if frog &lt; croak[0][i]: </span><br><span class="line">                    ans.put(croak[4][i])</span><br><span class="line">                else:</span><br><span class="line">                    ans.put(frog)</span><br><span class="line">                    ans.put(croak[4][i])</span><br><span class="line">        return ans.qsize()</span><br></pre></td></tr></table></figure></p>
+<h2 id="带星号的括号匹配双栈">带星号的括号匹配（双栈）</h2>
+<blockquote>
+<p>Given a string containing only three types of characters: '(', ')' and '*', write a function to check whether this string is valid. We define the validity of a string by these rules: Any left parenthesis '(' must have a corresponding right parenthesis ')'. Any right parenthesis ')' must have a corresponding left parenthesis '('. Left parenthesis '(' must go before the corresponding right parenthesis ')'. '*' could be treated as a single right parenthesis ')' or a single left parenthesis '(' or an empty string. An empty string is also valid.</p>
+</blockquote>
+<blockquote>
+<p><strong>Example 1:</strong> Input: &quot;()&quot; Output: True <strong>Example 2:</strong> Input: &quot;(*)&quot; Output: True <strong>Example 3:</strong> Input: &quot;(*))&quot; Output: True</p>
+</blockquote>
+<blockquote>
+<p><strong>Note:</strong> The string size will be in the range [1, 100].</p>
+</blockquote>
+<p>【题意】 在普通的括号匹配上增加了一个*字符，这个字符可以随意被当做 ( 或 ) 或空 问能不能合法匹配</p>
+<p>【思路】 先是想到在普通的括号栈匹配加dfs 把*的三种可能都搜一遍 但没法存dp 因为不符合独立的子结构 所以3^100可能会T 实现了一下果然T了</p>
+<p>看了解答才知道应该把左括号和*分别用两个栈存下来，当遇到有括号的时候优先匹配左括号，左括号没有了再匹配*，最后如果左括号还没被匹配完，就拿*去匹配，这时候要判断下*的位置是不是在左括号的后面，所以前面那两个栈应该用来存下标位置</p>
+<p>【代码】 dfs的代码： （会T，但是debug了很久还是存一下。要注意不能改变stack，因为这样在三个or连续的那边会导致后一个or用到的是前一个搜完得到的stack而非原本的stack） <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    def dfs(self, stack, s, pos):</span><br><span class="line">        if pos&gt;&#x3D;len(s):</span><br><span class="line">            if len(stack)&#x3D;&#x3D;0: return True</span><br><span class="line">            else: return False</span><br><span class="line">        </span><br><span class="line">        if len(stack)!&#x3D;0 and stack[-1]&#x3D;&#x3D;&#39;(&#39; and s[pos]&#x3D;&#x3D;&#39;)&#39;:</span><br><span class="line">                return self.dfs(stack[:-1], s, pos+1)</span><br><span class="line">        </span><br><span class="line">        if s[pos]&#x3D;&#x3D;&#39;*&#39;:</span><br><span class="line">            return self.dfs(stack, s[:pos]+&quot;)&quot;+s[pos+1:], pos) or self.dfs(stack,s,pos+1) or self.dfs(stack, s[:pos]+&quot;(&quot;+s[pos+1:], pos)</span><br><span class="line">        else:</span><br><span class="line">            # stack.append(s[pos]) 不能这样写，会改变后续递归的stack</span><br><span class="line">            return self.dfs(stack+[s[pos]], s, pos+1)</span><br><span class="line">            </span><br><span class="line">    </span><br><span class="line">    def checkValidString(self, s: str) -&gt; bool:</span><br><span class="line">        return self.dfs([],s,0)</span><br></pre></td></tr></table></figure></p>
+<p>双栈做法： <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    def checkValidString(self, s: str) -&gt; bool:</span><br><span class="line">        leftpar &#x3D; []</span><br><span class="line">        star &#x3D; []</span><br><span class="line">        </span><br><span class="line">        for i in range(len(s)):</span><br><span class="line">            if s[i]&#x3D;&#x3D;&#39;(&#39;: leftpar.append(i)</span><br><span class="line">            elif s[i]&#x3D;&#x3D;&#39;*&#39;: star.append(i)</span><br><span class="line">            else:</span><br><span class="line">                if len(leftpar): leftpar.pop()</span><br><span class="line">                elif len(star): star.pop()</span><br><span class="line">                else: return False</span><br><span class="line">                </span><br><span class="line">        if len(leftpar)&gt;len(star): return False</span><br><span class="line">    </span><br><span class="line">        while len(leftpar):</span><br><span class="line">            le &#x3D; leftpar.pop()</span><br><span class="line">            st &#x3D; star.pop()</span><br><span class="line">            if st&lt;le: return False</span><br><span class="line">        </span><br><span class="line">        return True</span><br></pre></td></tr></table></figure></p>
+<h2 id="数目相同的最长子段技巧map">01数目相同的最长子段（技巧+map）</h2>
+<blockquote>
+<p>Given a binary array, find the maximum length of a contiguous subarray with equal number of 0 and 1.</p>
+</blockquote>
+<blockquote>
+<p><strong>Example 1:</strong> Input: [0,1] Output: 2 Explanation: [0, 1] is the longest contiguous subarray with equal number of 0 and 1. <strong>Example 2:</strong> Input: [0,1,0] Output: 2 Explanation: [0, 1] (or [1, 0]) is a longest contiguous subarray with equal number of 0 and 1.</p>
+</blockquote>
+<blockquote>
+<p>Note: The length of the given binary array will not exceed 50,000.</p>
+</blockquote>
+<p>【题意】 找最长子数组使得有相同数量的0和1，问数组长度</p>
+<p>【思路】 很容易想到前缀和 然后因为需要找sum值的差为长度的一半的位置 变成On^2超时 然后想到栈 发现有问题</p>
+<p>最终的思路是 把0换成-1 这样就可以转换为 前缀和为0或出现两个相同的前缀和求他们的下标差 可以建map方便找到第一次出现的位置</p>
+<p>【代码】 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    def findMaxLength(self, nums: List[int]) -&gt; int:</span><br><span class="line">        if len(nums)&#x3D;&#x3D;0: return 0</span><br><span class="line">        </span><br><span class="line">        dic &#x3D; &#123;&#125;</span><br><span class="line">        sums &#x3D; [1 if nums[0]&#x3D;&#x3D;1 else -1]</span><br><span class="line">        dic[sums[0]]&#x3D;0</span><br><span class="line">        ans &#x3D; 0</span><br><span class="line">        </span><br><span class="line">        for i in range(1,len(nums)):</span><br><span class="line">            now &#x3D; sums[i-1] + (1 if nums[i]&#x3D;&#x3D;1 else -1)</span><br><span class="line">            sums.append(now)</span><br><span class="line">            if now&#x3D;&#x3D;0: ans &#x3D; max(ans, i+1)</span><br><span class="line">            elif now in dic:</span><br><span class="line">                ans &#x3D; max(ans, i-dic[now])</span><br><span class="line">            else:</span><br><span class="line">                dic[now] &#x3D; i</span><br><span class="line">        return ans</span><br></pre></td></tr></table></figure></p>
+<h2 id="活动选择问题贪心">活动选择问题（贪心）</h2>
+<blockquote>
+<ol start="1353" type="1">
+<li>Maximum Number of Events That Can Be Attended</li>
+</ol>
+</blockquote>
+<blockquote>
+<p>Given an array of events where events[i] = [startDayi, endDayi]. Every event i starts at startDayi and ends at endDayi. You can attend an event i at any day d where startTimei &lt;= d &lt;= endTimei. Notice that you can only attend one event at any time d. Return the maximum number of events you can attend.</p>
+</blockquote>
+<blockquote>
+<p><strong>Example 1:</strong> Input: events = [[1,2],[2,3],[3,4]] Output: 3 Explanation: You can attend all the three events. One way to attend them all is as shown. Attend the first event on day 1. Attend the second event on day 2. Attend the third event on day 3. <strong>Example 2:</strong> Input: events= [[1,2],[2,3],[3,4],[1,2]] Output: 4 <strong>Example 3:</strong> Input: events = [[1,4],[4,4],[2,2],[3,4],[1,1]] Output: 4</p>
+</blockquote>
+<p>【题意】 有一组给了 (起始日期,结束日期) 的活动，每天只能参加一个活动，问最多能参加多少个活动。</p>
+<p>【思路】 这题特别像《挑战》的那道经典题，看着像dp其实可以O(n)的贪心做完。那题是选择活动而不是选择日期，选完一个活动之后，其他有交集的活动就不可选。这样按照end顺序sort之后，从第一个开始 <code>if(t&lt;arr[i].start) t=arr[i].end, ans++</code>。虽然贪心的正确性不懂哪里来但确实想不出反例。</p>
+<p>这题虽然很容易想到是遍历天数再看活动是否符合，但不管用start排序还是end排序都会有问题，如果按照start排序，那<code>[[1,2][1,2][3,3][1,5][1,5]]</code>有问题，按照end排序，那<code>[[1,5][1,5][1,5][2,4][2,4]]</code>会有问题，也就是不能满足扫过这一遍经过就直接抛弃。</p>
+<p>事实上这题还是个贪心题，只是需要用优先队列来动态维护可以选择的活动（挑战的sort过程其实也可以看做是一个优先队列）。用一个pq来装活动的end时间，并且在遍历日期的时候更新pq，保证这些end时间都是&gt;=t的（都是开放可选的），时间复杂度O(NlogN)。</p>
+<p>按照start排序活动。遍历时间t。对于每个t，从前往后找活动，一旦遇上了一个活动(start==t)，就把它的end时间扔进优先队列。然后把pq里面 &lt; t的这些过期活动pop掉。这样之后pq里面都是t这天可选的了。选择优先队列中的第一个活动也即end最小的那个（贪心策略）pop掉，ans++。</p>
+<p>【代码】 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">int maxEvents(vector&lt;vector&lt;int&gt;&gt;&amp; events) &#123;</span><br><span class="line">    priority_queue &lt;int, vector&lt;int&gt;, greater&lt;int&gt;&gt; pq;</span><br><span class="line">    sort(events.begin(), events.end());</span><br><span class="line">    </span><br><span class="line">    int i &#x3D; 0, ans &#x3D; 0;</span><br><span class="line">    for (int t &#x3D; 1; t &lt;&#x3D; 100000; ++t) &#123;</span><br><span class="line">        while (i&lt;events.size() &amp;&amp; events[i][0]&#x3D;&#x3D;t)&#123;</span><br><span class="line">            pq.push(events[i][1]);</span><br><span class="line">            i++;</span><br><span class="line">        &#125;</span><br><span class="line">        while (pq.size() &amp;&amp; pq.top() &lt; t) pq.pop();</span><br><span class="line">        if (pq.size()) &#123;</span><br><span class="line">            pq.pop();</span><br><span class="line">            ++ans;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="多次求和构造数组数学trick">多次求和构造数组（数学trick）</h2>
+<blockquote>
+<ol start="5343" type="1">
+<li>Construct Target Array With Multiple Sums</li>
+</ol>
+</blockquote>
+<blockquote>
+<p>Given an array of integers target. From a starting array, A consisting of all 1's, you may perform the following procedure : let x be the sum of all elements currently in your array. choose index i, such that 0 &lt;= i &lt; target.size and set the value of A at index i to x. You may repeat this procedure as many times as needed. Return True if it is possible to construct the target array from A otherwise return False.</p>
+</blockquote>
+<blockquote>
+<p><strong>Example 1:</strong> Input: target = [9,3,5] Output: true Explanation: Start with [1, 1, 1] [1, 1, 1], sum = 3 choose index 1 [1, 3, 1], sum = 5 choose index 2 [1, 3, 5], sum = 9 choose index 0 [9, 3, 5] Done <strong>Example 2:</strong> Input: target = [1,1,1,2] Output: false Explanation: Impossible to create target array from [1,1,1,1]. <strong>Example 3:</strong> Input: target = [8,5] Output: true</p>
+</blockquote>
+<blockquote>
+<p><strong>Constraints:</strong> N == target.length 1 &lt;= target.length &lt;= 5 * 10^4 1 &lt;= target[i] &lt;= 10^9</p>
+</blockquote>
+<p>【题意】 从[1,1,1...,1]开始做操作，每次全部求和得到一个数替换掉一个位置，问最终能不能得到target。</p>
+<p>【思路】 一开始想的是类似于需要 a<em>n+b</em>(n-1)+c*(n-2)+... 能凑出来的数，后来意识到，思路不是去凑出而是去还原。 按照它的规则，一列最大数一定是上一步的和，并且最大值肯定是唯一的，因此就每次拿最大数去减其他的和，直到减到全是1，减完出现负数或0就失败。 这样直接写就过了，也没有超时，唯一注意的是求和要用long。还可以有其他缩短时间的操作，比如不要每次找最大而是用优先队列，以及特判奇数个元素必须全是奇数、取模运算加速等等。</p>
+<p>【代码】 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    </span><br><span class="line">    bool work(vector&lt;int&gt;&amp; target)&#123;</span><br><span class="line">        int maxval &#x3D; 0;</span><br><span class="line">        int maxid &#x3D; 0;</span><br><span class="line">        long sum &#x3D; 0;</span><br><span class="line">        for(int i &#x3D; 0; i &lt; target.size(); i++)&#123;</span><br><span class="line">            if(maxval &lt; target[i])&#123;</span><br><span class="line">                maxval &#x3D; target[i];</span><br><span class="line">                maxid &#x3D; i;</span><br><span class="line">            &#125;</span><br><span class="line">            sum +&#x3D; target[i];</span><br><span class="line">        &#125;</span><br><span class="line">        if(maxval-(sum-maxval) &lt;&#x3D; 0) return false;</span><br><span class="line">        else&#123;</span><br><span class="line">            target[maxid] &#x3D; maxval-(sum-maxval);</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    bool isPossible(vector&lt;int&gt;&amp; target) &#123;</span><br><span class="line">        bool flag;</span><br><span class="line">        while(1)&#123;</span><br><span class="line">            flag &#x3D; true;</span><br><span class="line">            for(int i &#x3D; 0; i &lt; target.size(); i++)&#123;</span><br><span class="line">                if(target[i]!&#x3D;1) &#123;</span><br><span class="line">                    flag &#x3D; false;</span><br><span class="line">                    if(work(target)&#x3D;&#x3D;false) return false;</span><br><span class="line">                    else break;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            if(flag) return true;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<h2 id="最多可坐位置数bitmapdp">最多可坐位置数（bitmap+dp）</h2>
+<blockquote>
+<ol start="1349" type="1">
+<li>Maximum Students Taking Exam</li>
+</ol>
+</blockquote>
+<blockquote>
+<p>Given a m * n matrix seats that represent seats distributions in a classroom. If a seat is broken, it is denoted by '#' character otherwise it is denoted by a '.' character. Students can see the answers of those sitting next to the left, right, upper left and upper right, but he cannot see the answers of the student sitting directly in front or behind him. Return the maximum number of students that can take the exam together without any cheating being possible.. Students must be placed in seats in good condition.</p>
+</blockquote>
+<blockquote>
+<p><strong>Example 1:</strong> Input: seats = [[&quot;#&quot;,&quot;.&quot;,&quot;#&quot;,&quot;#&quot;,&quot;.&quot;,&quot;#&quot;], [&quot;.&quot;,&quot;#&quot;,&quot;#&quot;,&quot;#&quot;,&quot;#&quot;,&quot;.&quot;], [&quot;#&quot;,&quot;.&quot;,&quot;#&quot;,&quot;#&quot;,&quot;.&quot;,&quot;#&quot;]] Output: 4 Explanation: Teacher can place 4 students in available seats so they don't cheat on the exam. <strong>Example 2:</strong> Input: seats = [[&quot;.&quot;,&quot;#&quot;], [&quot;#&quot;,&quot;#&quot;], [&quot;#&quot;,&quot;.&quot;], [&quot;#&quot;,&quot;#&quot;], [&quot;.&quot;,&quot;#&quot;]] Output: 3 Explanation: Place all students in available seats. <strong>Example 3:</strong> Input: seats = [[&quot;#&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;#&quot;], [&quot;.&quot;,&quot;#&quot;,&quot;.&quot;,&quot;#&quot;,&quot;.&quot;], [&quot;.&quot;,&quot;.&quot;,&quot;#&quot;,&quot;.&quot;,&quot;.&quot;], [&quot;.&quot;,&quot;#&quot;,&quot;.&quot;,&quot;#&quot;,&quot;.&quot;], [&quot;#&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;#&quot;]] Output: 10 Explanation: Place students in available seats in column 1, 3 and 5.</p>
+</blockquote>
+<blockquote>
+<p><strong>Constraints:</strong> seats contains only characters '.' and'#'. m == seats.length n == seats[i].length 1 &lt;= m &lt;= 8 1 &lt;= n &lt;= 8</p>
+</blockquote>
+<p>【题意】 # 表示这个位置不可坐，. 表示位置可坐。如果这个位置有学生坐，那么要保证他的左右和左前、右前没有人。问这个教室能坐下的最多学生数。</p>
+<p>显然是个dp题，但是难点在于怎么存状态。开始时我把整张图用字符串表示然后用map存，可是这样全搜索状态有2^64这么大，然后就TLE了。</p>
+<p>事实上既然只有两个状态，那么其实可以用bitmap来表示，会用到的操作会有这些：</p>
+<ul>
+<li><code>x &amp; (1 &lt;&lt; i)</code> 求x中第i个位置的值</li>
+<li><code>(x &amp; y) == x</code> 确保x是y的子集（括号不能省！位运算优先级低）</li>
+<li><code>(x &amp; (x &gt;&gt; 1)) == 0</code> 确保x中的1都是有间隔的</li>
+</ul>
+<p>用dp[i][mask]来表示在第i行状态是mask的情况下，前i行能坐下的最多学生数。 状态转移方程：<code>dp[i][mask] = max(dp[i - 1][mask']) + mask中1的数量</code>。1的数量可以用cpp内置函数<code>__builtin_popcount</code> 来求。</p>
+<p>并且两行之间需要满足<code>(mask &amp; (mask' &gt;&gt; 1)) == 0</code> 且 <code>((mask &gt;&gt; 1) &amp; mask') == 0</code></p>
+<p>按照记忆化搜索的话，就是遍历下最后一行可能的状态（最多2^8种）确保<code>(mask&amp;valid[row])==mask</code>是全部可放下状态的子集 且 <code>(mask&amp;(mask&gt;&gt;1))==0</code> 1之间有间隔，再接着搜索上面一行状态转移。</p>
+<p>【代码】 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    </span><br><span class="line">    int m,n;</span><br><span class="line">    int max_x;</span><br><span class="line">    vector&lt;int&gt; valid;</span><br><span class="line">    int dp[9][257];</span><br><span class="line">    </span><br><span class="line">    void init_valid(vector&lt;vector&lt;char&gt;&gt;&amp; seats)&#123;</span><br><span class="line">        for(int i &#x3D; 0; i &lt; m; i++)&#123;</span><br><span class="line">            int tmp &#x3D; 0;</span><br><span class="line">            for(int j &#x3D; 0; j &lt; n; j++)&#123;</span><br><span class="line">                tmp &lt;&lt;&#x3D; 1;</span><br><span class="line">                tmp +&#x3D; seats[i][j]&#x3D;&#x3D;&#39;.&#39; ? 1:0;</span><br><span class="line">            &#125;</span><br><span class="line">            valid.push_back(tmp);</span><br><span class="line">        &#125;   </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    int dfs(vector&lt;vector&lt;char&gt;&gt;&amp; seats, int row, int mask)&#123;</span><br><span class="line">        if(!((mask&amp;valid[row])&#x3D;&#x3D;mask) || !((mask&amp;(mask&gt;&gt;1))&#x3D;&#x3D;0)) return -1; &#x2F;&#x2F;mask invalid</span><br><span class="line">        if(dp[row][mask]!&#x3D;-1) return dp[row][mask]; </span><br><span class="line">        if(row&#x3D;&#x3D;0) return dp[row][mask]&#x3D;__builtin_popcount(mask); &#x2F;&#x2F; no next</span><br><span class="line">        </span><br><span class="line">        for(int x &#x3D; 0; x &lt; max_x; x++)&#123; &#x2F;&#x2F;next row</span><br><span class="line">            if(((mask&amp;(x&lt;&lt;1))&#x3D;&#x3D;0) &amp;&amp; ((mask&amp;(x&gt;&gt;1))&#x3D;&#x3D;0))&#123;</span><br><span class="line">                int front &#x3D; dfs(seats, row-1, x);</span><br><span class="line">                if(front!&#x3D;-1) dp[row][mask] &#x3D; max(dp[row][mask], front+__builtin_popcount(mask));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return dp[row][mask];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    int maxStudents(vector&lt;vector&lt;char&gt;&gt;&amp; seats) &#123;</span><br><span class="line">        m &#x3D; seats.size();</span><br><span class="line">        n &#x3D; seats[0].size();</span><br><span class="line">        max_x &#x3D; pow(2,n);</span><br><span class="line">        memset(dp,-1,sizeof(dp));</span><br><span class="line">        init_valid(seats);</span><br><span class="line">        </span><br><span class="line">        int ans &#x3D; 0;</span><br><span class="line">        for(int x &#x3D; 0; x &lt; max_x; x++)&#123;</span><br><span class="line">            ans &#x3D; max(ans, dfs(seats, m-1, x));</span><br><span class="line">        &#125;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/leetcode/" rel="tag"># leetcode</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020/04/18/%E6%89%93%E9%A2%98%E5%B8%B8%E7%94%A8%E5%BA%93%E5%87%BD%E6%95%B0_python/" rel="next" title="打题常用库函数(python)">
+      打题常用库函数(python) <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#按照高度重组队列思维"><span class="nav-number">1.</span> <span class="nav-text">按照高度重组队列（思维）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#连线不交叉的数字匹配dp"><span class="nav-number">2.</span> <span class="nav-text">连线不交叉的数字匹配（dp）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#循环列表的最大子串和数学trick"><span class="nav-number">3.</span> <span class="nav-text">循环列表的最大子串和（数学trick）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#从两端取卡k次的最大和前缀和"><span class="nav-number">4.</span> <span class="nav-text">从两端取卡k次的最大和（前缀和）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最少只青蛙叫优先队列"><span class="nav-number">5.</span> <span class="nav-text">最少只青蛙叫（优先队列）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#带星号的括号匹配双栈"><span class="nav-number">6.</span> <span class="nav-text">带星号的括号匹配（双栈）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数目相同的最长子段技巧map"><span class="nav-number">7.</span> <span class="nav-text">01数目相同的最长子段（技巧+map）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#活动选择问题贪心"><span class="nav-number">8.</span> <span class="nav-text">活动选择问题（贪心）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多次求和构造数组数学trick"><span class="nav-number">9.</span> <span class="nav-text">多次求和构造数组（数学trick）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最多可坐位置数bitmapdp"><span class="nav-number">10.</span> <span class="nav-text">最多可坐位置数（bitmap+dp）</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="thousfeet"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">thousfeet</p>
+  <div class="site-description" itemprop="description">点一杯月光</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">thousfeet</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : true,
+      appId      : '3IqmK7DaHDXlbtnr4LesniUw-gzGzoHsz',
+      appKey     : '2WXB4i1BEcwgiTF6CoPg5wio',
+      placeholder: "Comments here",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

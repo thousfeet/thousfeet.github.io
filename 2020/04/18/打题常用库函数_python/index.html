@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+<meta name="referrer" content="never" /> ​​​​
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="记录 python 常用做题语法，文件读写、字符串操作函数、模拟STL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="打题常用库函数(python)">
+<meta property="og:url" content="http://yoursite.com/2020/04/18/%E6%89%93%E9%A2%98%E5%B8%B8%E7%94%A8%E5%BA%93%E5%87%BD%E6%95%B0_python/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="记录 python 常用做题语法，文件读写、字符串操作函数、模拟STL">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-04-18T14:56:04.000Z">
+<meta property="article:modified_time" content="2020-06-07T05:18:09.194Z">
+<meta property="article:author" content="thousfeet">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/04/18/%E6%89%93%E9%A2%98%E5%B8%B8%E7%94%A8%E5%BA%93%E5%87%BD%E6%95%B0_python/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>打题常用库函数(python) | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/18/%E6%89%93%E9%A2%98%E5%B8%B8%E7%94%A8%E5%BA%93%E5%87%BD%E6%95%B0_python/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="thousfeet">
+      <meta itemprop="description" content="点一杯月光">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          打题常用库函数(python)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-04-18 22:56:04" itemprop="dateCreated datePublished" datetime="2020-04-18T22:56:04+08:00">2020-04-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-06-07 13:18:09" itemprop="dateModified" datetime="2020-06-07T13:18:09+08:00">2020-06-07</time>
+              </span>
+
+          
+            <span id="/2020/04/18/%E6%89%93%E9%A2%98%E5%B8%B8%E7%94%A8%E5%BA%93%E5%87%BD%E6%95%B0_python/" class="post-meta-item leancloud_visitors" data-flag-title="打题常用库函数(python)" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/04/18/%E6%89%93%E9%A2%98%E5%B8%B8%E7%94%A8%E5%BA%93%E5%87%BD%E6%95%B0_python/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/04/18/%E6%89%93%E9%A2%98%E5%B8%B8%E7%94%A8%E5%BA%93%E5%87%BD%E6%95%B0_python/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>记录 python 常用做题语法，文件读写、字符串操作函数、模拟STL</p>
+<a id="more"></a>
+<h2 id="读写文件">读写文件</h2>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 读</span><br><span class="line">with open(&quot;xx.txt&quot;,&quot;r&quot;) as f:</span><br><span class="line">    article &#x3D; f.read() # 返回字符串</span><br><span class="line">    line &#x3D; f.readline()</span><br><span class="line">    lines &#x3D; f.readlines() # 返回字符串列表</span><br><span class="line"></span><br><span class="line"># 写</span><br><span class="line">f &#x3D; open(&#39;xx.txt&#39;,&#39;w&#39;)</span><br><span class="line">f.write(&#39;...&#39;) # 直接覆盖</span><br><span class="line">f &#x3D; open(&#39;xx.txt&#39;,&#39;a&#39;)</span><br><span class="line">f.write(&#39;...&#39;) # 追加写入</span><br></pre></td></tr></table></figure>
+<h2 id="控制台读入">控制台读入</h2>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a &#x3D; input()</span><br></pre></td></tr></table></figure>
+<h2 id="格式化输出-format">格式化输出 format</h2>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; print(&#39;&#123;&#125; &#123;&#125;&#39;.format(&#39;hello&#39;,&#39;world&#39;))  # 不带字段</span><br><span class="line">hello world</span><br><span class="line">&gt;&gt;&gt; print(&#39;&#123;0&#125; &#123;1&#125; &#123;0&#125;&#39;.format(&#39;hello&#39;,&#39;world&#39;))  # 带数字编号</span><br><span class="line">hello world hello</span><br><span class="line">&gt;&gt;&gt; print(&#39;&#123;a&#125; &#123;tom&#125; &#123;a&#125;&#39;.format(tom&#x3D;&#39;hello&#39;,a&#x3D;&#39;world&#39;))  # 带关键字</span><br><span class="line">world hello world</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; print(&#39;&#123;:f&#125;&#39;.format(20)) # 浮点</span><br><span class="line">16 20.000000</span><br></pre></td></tr></table></figure>
+<h2 id="main-函数">main 函数</h2>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">def main(argv&#x3D;None):</span><br><span class="line">    if argv is None:</span><br><span class="line">        argv &#x3D; sys.argv</span><br><span class="line">    pass</span><br><span class="line"></span><br><span class="line">if __name__ &#x3D;&#x3D; &quot;__main__&quot;:</span><br><span class="line">    sys.exit(main())</span><br></pre></td></tr></table></figure>
+<h2 id="类继承">类继承</h2>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">class A:</span><br><span class="line">    def __init__(self):</span><br><span class="line">        self.x &#x3D; 0</span><br><span class="line"></span><br><span class="line">class B(A):</span><br><span class="line">    def __init__(self):</span><br><span class="line">        super().__init__()</span><br><span class="line">        self.y &#x3D; 1</span><br></pre></td></tr></table></figure>
+<h2 id="字符串操作">字符串操作</h2>
+<h3 id="join">join()</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">s &#x3D; &quot;-&quot;</span><br><span class="line">seq &#x3D; (&quot;a&quot;, &quot;b&quot;, &quot;c&quot;) # This is sequence of strings.</span><br><span class="line">print(s.join(seq))</span><br></pre></td></tr></table></figure>
+<h3 id="split">split()</h3>
+<p>对字符串进行切片，默认为所有的空字符，包括空格、换行()、制表符()等，如果第二个参数 num 有指定值，则分割为 num+1 个子字符串(切num次)。</p>
+<p>str.split(str, num)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print (str.split( ))       # 以空格为分隔符</span><br><span class="line">print (str.split(&#39;i&#39;,1))   # 以 i 为分隔符</span><br></pre></td></tr></table></figure>
+<p>多个分隔符</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">re.split(r&quot;[;,?]&quot;, line)</span><br></pre></td></tr></table></figure>
+<h3 id="strip">strip()</h3>
+<p>移除字符串头尾指定的字符（默认为空格或换行符）或字符序列。</p>
+<p>str.strip([chars])</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">str.strip() #去除首尾空格</span><br><span class="line">str.strip(&#39;01&#39;) #去除首尾字符0或1</span><br></pre></td></tr></table></figure>
+<h3 id="replace">replace()</h3>
+<p>把字符串中的旧字符串替换成新字符串，如果指定第三个参数max，则替换不超过 max 次。</p>
+<p>str.replace(old, new[, max])</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">str.replace(&quot;is&quot;, &quot;was&quot;)</span><br></pre></td></tr></table></figure>
+<h3 id="ord">ord()</h3>
+<p>以一个字符(长度为1的字符串) 作为参数，返回对应的 ASCII 或者 Unicode 数值。配对函数是chr()。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ord(c)</span><br></pre></td></tr></table></figure>
+<h3 id="isdigit">isdigit()</h3>
+<p>判断字符串是否全为数字组成 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">str.isdigit()</span><br></pre></td></tr></table></figure></p>
+<h3 id="string转int">string转int</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int(str)</span><br></pre></td></tr></table></figure>
+<h3 id="string数组转为int数组">string数组转为int数组</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">results &#x3D; list(map(int, results))</span><br></pre></td></tr></table></figure>
+<h2 id="list-数组">list 数组</h2>
+<p><strong>初始化</strong> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">b &#x3D; [0 for _ in range(10)]  #也可以b &#x3D; [0]*10</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;二维</span><br><span class="line">a &#x3D; [[0 for i in range(m)] for j in range(n)]</span><br></pre></td></tr></table></figure></p>
+<p><strong>末尾元素</strong> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a[-1]</span><br></pre></td></tr></table></figure></p>
+<p><strong>判断存在</strong> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">if x in List</span><br></pre></td></tr></table></figure></p>
+<p><strong>逆序遍历</strong> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">a &#x3D; [1,3,6,8,9]</span><br><span class="line"></span><br><span class="line">for i in a[::-1]:</span><br><span class="line">    print(i)</span><br><span class="line">    </span><br><span class="line">for i in range(len(a)-1,-1,-1):</span><br><span class="line">    print(a[i])</span><br></pre></td></tr></table></figure></p>
+<p><strong>查找列表中某个值value的位置</strong> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">p&#x3D;list.index(value)</span><br></pre></td></tr></table></figure></p>
+<p><strong>去除list中的空字符串</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arr &#x3D; list(filter(None, arr))</span><br></pre></td></tr></table></figure>
+<p><strong>插入 insert()</strong></p>
+<p>在index位置插入obj <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">list.insert(index, obj)</span><br></pre></td></tr></table></figure></p>
+<p>得到所有元素平方的list</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">x &#x3D; [1,2,3,4,5]</span><br><span class="line"></span><br><span class="line"># map</span><br><span class="line">def square(num):</span><br><span class="line">    return num*num</span><br><span class="line">list(map(square,x))</span><br><span class="line"></span><br><span class="line">#lambda</span><br><span class="line">list(map(lambda num:num*num, x))</span><br><span class="line"></span><br><span class="line"># list comprehensions</span><br><span class="line">[num*num for num in x]</span><br></pre></td></tr></table></figure>
+<h3 id="排序sortsorted">排序sort()/sorted()</h3>
+<p>list.sort() 方法只可用于list，而 sorted() 函数可以接受任何可迭代对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">list.sort() #直接修改原list</span><br><span class="line"></span><br><span class="line">list.sort(cmp&#x3D;None, key&#x3D;None, reverse&#x3D;False)</span><br></pre></td></tr></table></figure>
+<p><strong>key的使用</strong></p>
+<p>使用对象的索引作为key：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">student_tuples &#x3D; [</span><br><span class="line">     (&#39;john&#39;, &#39;A&#39;, 15),</span><br><span class="line">     (&#39;jane&#39;, &#39;B&#39;, 12),</span><br><span class="line">     (&#39;dave&#39;, &#39;B&#39;, 10),</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">sorted(student_tuples, key&#x3D;lambda student: student[2])   # sort by age</span><br></pre></td></tr></table></figure>
+<p>对具有命名属性的对象：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class Student:</span><br><span class="line">     def __init__(self, name, grade, age):</span><br><span class="line">         self.name &#x3D; name</span><br><span class="line">        self.grade &#x3D; grade</span><br><span class="line">         self.age &#x3D; age</span><br><span class="line">     def __repr__(self):</span><br><span class="line">         return repr((self.name, self.grade, self.age))</span><br><span class="line"></span><br><span class="line">student_objects &#x3D; [</span><br><span class="line">     Student(&#39;john&#39;, &#39;A&#39;, 15),</span><br><span class="line">     Student(&#39;jane&#39;, &#39;B&#39;, 12),</span><br><span class="line">     Student(&#39;dave&#39;, &#39;B&#39;, 10),</span><br><span class="line"> ]</span><br><span class="line"></span><br><span class="line"> sorted(student_objects, key&#x3D;lambda student: student.age)   # sort by age</span><br><span class="line"> sorted(student_objects, key&#x3D;lambda student: (student.grade, student.age))</span><br></pre></td></tr></table></figure>
+<p>使用 itemgetter() 、 attrgetter() 和 methodcaller() 函数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">from operator import itemgetter, attrgetter</span><br><span class="line"></span><br><span class="line">sorted(student_tuples, key&#x3D;itemgetter(2))</span><br><span class="line">sorted(student_objects, key&#x3D;attrgetter(&#39;age&#39;))</span><br></pre></td></tr></table></figure>
+<p><strong>多级排序：</strong></p>
+<p>按 grade 降序然后 age 升序对学生数据进行排序，请先 age 排序，然后再使用 grade 排序：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">s &#x3D; sorted(student_objects, key&#x3D;attrgetter(&#39;age&#39;))     # sort on secondary key</span><br><span class="line">sorted(s, key&#x3D;attrgetter(&#39;grade&#39;), reverse&#x3D;True)       # sort on primary key</span><br><span class="line">[(&#39;dave&#39;, &#39;B&#39;, 10), (&#39;jane&#39;, &#39;B&#39;, 12), (&#39;john&#39;, &#39;A&#39;, 15)]</span><br></pre></td></tr></table></figure>
+<p>对二维lists进行排序。对于每个list，其他位置降序排序，第num个位置升序排序：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s &#x3D; sorted(lists, key&#x3D;lambda x: x[num])</span><br><span class="line">s &#x3D; sorted(s, key&#x3D;lambda x: x[:num], reverse&#x3D;True)</span><br></pre></td></tr></table></figure>
+<h3 id="zip">zip()</h3>
+<p>参数为可迭代的对象。将对象中对应的元素打包成一个个元组，返回由这些元组组成的对象。</p>
+<p>zip([iterable, ...])</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;a &#x3D; [1,2,3]</span><br><span class="line">&gt;&gt;&gt; b &#x3D; [4,5,6]</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; list(zip(a,b))</span><br><span class="line">[(1, 4), (2, 5), (3, 6)]</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; a1, a2 &#x3D; zip(*zip(a,b)) #zip(*...) 解压，返回二维矩阵式</span><br><span class="line">&gt;&gt;&gt; list(a1)</span><br><span class="line">[1, 2, 3]</span><br></pre></td></tr></table></figure>
+<h3 id="enumerate">enumerate()</h3>
+<p>作用于一个可遍历的数据对象，返回下标和数据</p>
+<p>enumerate(sequence, [start=0])</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;seasons &#x3D; [&#39;Spring&#39;, &#39;Summer&#39;, &#39;Fall&#39;, &#39;Winter&#39;]</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; list(enumerate(seasons))</span><br><span class="line">[(0, &#39;Spring&#39;), (1, &#39;Summer&#39;), (2, &#39;Fall&#39;), (3, &#39;Winter&#39;)]</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; list(enumerate(seasons, start&#x3D;1))       # 下标从 1 开始</span><br><span class="line">[(1, &#39;Spring&#39;), (2, &#39;Summer&#39;), (3, &#39;Fall&#39;), (4, &#39;Winter&#39;)]</span><br></pre></td></tr></table></figure>
+<h2 id="dict-字典">dict 字典</h2>
+<p>类似map的使用</p>
+<p>初始化一个空dict <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dic &#x3D; &#123;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>添加元素 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">if x in dic: dic[x]+&#x3D;1</span><br><span class="line">else: dic[x]&#x3D;1</span><br></pre></td></tr></table></figure></p>
+<p>遍历 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">for x in dic: # x是key</span><br></pre></td></tr></table></figure></p>
+<p>将字典中的值转换成list <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">list(dic.values())</span><br><span class="line">list(dic.keys())</span><br></pre></td></tr></table></figure></p>
+<p>按key排序 (直接sorted返回的是list) <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dic &#x3D; dict(sorted(dic.items(), key&#x3D;lambda x: x[0])) &#x2F;&#x2F;改为1即按value排序</span><br></pre></td></tr></table></figure></p>
+<h2 id="queue-队列">queue 队列</h2>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#向队列中添加元素</span><br><span class="line">Queue.put(item[, block[, timeout]])</span><br><span class="line">#从队列中获取元素并删除</span><br><span class="line">Queue.get([block[, timeout]])</span><br><span class="line">#队列判空</span><br><span class="line">Queue.empty()</span><br><span class="line">#队列大小</span><br><span class="line">Queue.qsize()</span><br></pre></td></tr></table></figure>
+<p>优先队列（默认从小到大排序）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">from queue import PriorityQueue</span><br><span class="line">pq &#x3D; PriorityQueue()</span><br><span class="line"></span><br><span class="line">pq.put((-x,x)) #构造元组使其从大到小排序</span><br></pre></td></tr></table></figure>
+<h2 id="stack-栈">stack 栈</h2>
+<p>用list就能直接模拟栈</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">stack &#x3D; [3, 4, 5]</span><br><span class="line">stack.append(6)</span><br><span class="line">stack.pop() #从栈顶取出元素</span><br></pre></td></tr></table></figure>
+<h2 id="collections">collections</h2>
+<h3 id="counter">Counter</h3>
+<p>list 的 counter： <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">from collections import Counter</span><br><span class="line"></span><br><span class="line">myList &#x3D; [1,1,2,3,4,5,3,2,3,4,2,1,2,3]</span><br><span class="line"></span><br><span class="line">Counter(myList) #Counter(&#123;2: 4, 3: 4, 1: 3, 4: 2, 5: 1&#125;)</span><br><span class="line">Counter(myList).items() #[(1, 3), (2, 4), (3, 4), (4, 2), (5, 1)]</span><br><span class="line"></span><br><span class="line">Counter(myList).keys() #[1, 2, 3, 4, 5]</span><br><span class="line">Counter(myList).values() #[3, 4, 4, 2, 1]</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">c &#x3D; Counter()                           # 创建一个新的空counter</span><br><span class="line">c &#x3D; Counter(&#39;abcasdf&#39;)                  # 一个迭代对象生成的counter </span><br><span class="line"># Counter(&#123;&#39;a&#39;: 2, &#39;c&#39;: 1, &#39;b&#39;: 1, &#39;s&#39;: 1, &#39;d&#39;: 1&#125;)</span><br><span class="line"></span><br><span class="line">c &#x3D; Counter(&#123;&#39;red&#39;: 4, &#39;yello&#39;: 2&#125;)      # 一个映射生成的counter</span><br><span class="line">c &#x3D; Counter(cats&#x3D;2, dogs&#x3D;5)             # 关键字参数生成的counter</span><br></pre></td></tr></table></figure>
+<p>因为 Counter 实现了字典的 <strong>missing</strong> 方法， 所以当访问不存在的key的时候，返回值为0:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">c &#x3D; Counter([&#39;apple&#39;, &#39;pear&#39;])</span><br><span class="line">c[&#39;orange&#39;] #0</span><br></pre></td></tr></table></figure>
+<p>counter 常用的方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"># elements() 按照counter的计数，重复返回元素</span><br><span class="line">c &#x3D; Counter(a&#x3D;4, b&#x3D;2, c&#x3D;0, d&#x3D;-2)</span><br><span class="line">list(c.elements())</span><br><span class="line">[&#39;a&#39;, &#39;a&#39;, &#39;a&#39;, &#39;a&#39;, &#39;b&#39;, &#39;b&#39;]</span><br><span class="line"> </span><br><span class="line"># most_common(n) 按照counter的计数，按照降序，返回前n项组成的list; n忽略时返回全部</span><br><span class="line">Counter(&#39;abracadabra&#39;).most_common(3)</span><br><span class="line">[(&#39;a&#39;, 5), (&#39;r&#39;, 2), (&#39;b&#39;, 2)]</span><br><span class="line"> </span><br><span class="line"># subtract([iterable-or-mapping]) counter按照相应的元素，计数相减</span><br><span class="line">c &#x3D; Counter(a&#x3D;4, b&#x3D;2, c&#x3D;0, d&#x3D;-2)</span><br><span class="line">d &#x3D; Counter(a&#x3D;1, b&#x3D;2, c&#x3D;3, d&#x3D;4)</span><br><span class="line">c.subtract(d) #Counter(&#123;&#39;a&#39;: 3, &#39;b&#39;: 0, &#39;c&#39;: -3, &#39;d&#39;: -6&#125;)</span><br><span class="line"> </span><br><span class="line"># Counter 间的数学集合操作</span><br><span class="line">c &#x3D; Counter(a&#x3D;3, b&#x3D;1, c&#x3D;5)</span><br><span class="line">d &#x3D; Counter(a&#x3D;1, b&#x3D;2, d&#x3D;4)</span><br><span class="line">c + d                       # 相加  </span><br><span class="line">#Counter(&#123;&#39;c&#39;: 5, &#39;a&#39;: 4, &#39;d&#39;: 4, &#39;b&#39;: 3&#125;)</span><br><span class="line">c - d                       # 相减, 只保留正值value  </span><br><span class="line">#Counter(&#123;&#39;c&#39;: 5, &#39;a&#39;: 2&#125;)</span><br><span class="line">c &amp; d                       # 交集:  取两者都有的key,value取小的那一个 </span><br><span class="line">#Counter(&#123;&#39;a&#39;: 1, &#39;b&#39;: 1&#125;)</span><br><span class="line">c | d                       # 并集:  汇聚所有的key, key相同的情况下，取大的value</span><br><span class="line">#Counter(&#123;&#39;c&#39;: 5, &#39;d&#39;: 4, &#39;a&#39;: 3, &#39;b&#39;: 2&#125;)</span><br><span class="line"></span><br><span class="line">#常见做法:</span><br><span class="line">sum(c.values())                 # 继承自字典的.values()方法返回values的列表，再求和</span><br><span class="line">c.clear()                       # 继承自字典的.clear()方法，清空counter</span><br><span class="line">list(c)                         # 返回key组成的list</span><br><span class="line">set(c)                          # 返回key组成的set</span><br><span class="line">dict(c)                         # 转化成字典</span><br><span class="line">c.items()                       # 转化成(元素，计数值)组成的列表</span><br><span class="line">Counter(dict(list_of_pairs))    # 从(元素，计数值)组成的列表转化成Counter</span><br><span class="line">c.most_common()[:-n-1:-1]       # 最小n个计数的(元素，计数值)组成的列表</span><br><span class="line">c +&#x3D; Counter()                  # 利用counter的相加来去除负值和0的值</span><br></pre></td></tr></table></figure>
+<h3 id="defaultdict">defaultdict</h3>
+<p>普通的dict需要手动判是否存在和初始化，用defaultdict会方便一些 key不存在的value默认为0，可以直接赋值 如dp[i,j]=xxx</p>
+<p>value是int： <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">s &#x3D; &#39;mississippi&#39;</span><br><span class="line">d &#x3D; defaultdict(int)</span><br><span class="line">for k in s:</span><br><span class="line">     d[k] +&#x3D; 1</span><br><span class="line"></span><br><span class="line">d.items()</span><br><span class="line">#[(&#39;i&#39;, 4), (&#39;p&#39;, 2), (&#39;s&#39;, 4), (&#39;m&#39;, 1)]</span><br></pre></td></tr></table></figure></p>
+<p>value是list： <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> s &#x3D; [(&#39;yellow&#39;, 1), (&#39;blue&#39;, 2), (&#39;yellow&#39;, 3), (&#39;blue&#39;, 4), (&#39;red&#39;, 1)]</span><br><span class="line"> d &#x3D; defaultdict(list)</span><br><span class="line">for k, v in s:</span><br><span class="line">     d[k].append(v)</span><br><span class="line"></span><br><span class="line">d.items()</span><br><span class="line">#[(&#39;blue&#39;, [2, 4]), (&#39;red&#39;, [1]), (&#39;yellow&#39;, [1, 3])]</span><br></pre></td></tr></table></figure></p>
+<h3 id="itertools.groupby">itertools.groupby</h3>
+<p>itertools.groupby(iterable[, key]) 返回一个产生按照key进行分组后的值集合的迭代器.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">people &#x3D; [[5,0],[7,0],[5,2],[6,1],[4,4],[7,1]]</span><br><span class="line">for k, g in itertools.groupby(people, key&#x3D;lambda x: x[0]) #以x[0]为key建组</span><br><span class="line">    print(k, g) #key, group</span><br><span class="line">    for x in g:</span><br><span class="line">        #group 中的每一项</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/python/" rel="tag"># python</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/04/18/leetcode%E5%88%B7%E9%A2%98%E5%90%88%E9%9B%86/" rel="prev" title="leetcode刷题合集">
+      <i class="fa fa-chevron-left"></i> leetcode刷题合集
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/04/19/ignore/%E6%97%A5%E5%B8%B8%E7%90%90%E7%A2%8E%E8%AE%B0%E5%BD%95/" rel="next" title="日常琐碎记录">
+      日常琐碎记录 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#读写文件"><span class="nav-number">1.</span> <span class="nav-text">读写文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#控制台读入"><span class="nav-number">2.</span> <span class="nav-text">控制台读入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#格式化输出-format"><span class="nav-number">3.</span> <span class="nav-text">格式化输出 format</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#main-函数"><span class="nav-number">4.</span> <span class="nav-text">main 函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类继承"><span class="nav-number">5.</span> <span class="nav-text">类继承</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串操作"><span class="nav-number">6.</span> <span class="nav-text">字符串操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#join"><span class="nav-number">6.1.</span> <span class="nav-text">join()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#split"><span class="nav-number">6.2.</span> <span class="nav-text">split()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#strip"><span class="nav-number">6.3.</span> <span class="nav-text">strip()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#replace"><span class="nav-number">6.4.</span> <span class="nav-text">replace()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ord"><span class="nav-number">6.5.</span> <span class="nav-text">ord()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#isdigit"><span class="nav-number">6.6.</span> <span class="nav-text">isdigit()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#string转int"><span class="nav-number">6.7.</span> <span class="nav-text">string转int</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#string数组转为int数组"><span class="nav-number">6.8.</span> <span class="nav-text">string数组转为int数组</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#list-数组"><span class="nav-number">7.</span> <span class="nav-text">list 数组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#排序sortsorted"><span class="nav-number">7.1.</span> <span class="nav-text">排序sort()&#x2F;sorted()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#zip"><span class="nav-number">7.2.</span> <span class="nav-text">zip()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#enumerate"><span class="nav-number">7.3.</span> <span class="nav-text">enumerate()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dict-字典"><span class="nav-number">8.</span> <span class="nav-text">dict 字典</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#queue-队列"><span class="nav-number">9.</span> <span class="nav-text">queue 队列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#stack-栈"><span class="nav-number">10.</span> <span class="nav-text">stack 栈</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#collections"><span class="nav-number">11.</span> <span class="nav-text">collections</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#counter"><span class="nav-number">11.1.</span> <span class="nav-text">Counter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#defaultdict"><span class="nav-number">11.2.</span> <span class="nav-text">defaultdict</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#itertools.groupby"><span class="nav-number">11.3.</span> <span class="nav-text">itertools.groupby</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="thousfeet"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">thousfeet</p>
+  <div class="site-description" itemprop="description">点一杯月光</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">thousfeet</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : true,
+      appId      : '3IqmK7DaHDXlbtnr4LesniUw-gzGzoHsz',
+      appKey     : '2WXB4i1BEcwgiTF6CoPg5wio',
+      placeholder: "Comments here",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
