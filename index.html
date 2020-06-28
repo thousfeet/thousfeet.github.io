@@ -189,6 +189,13 @@
 
               <time title="创建时间：2020-06-19 11:53:15" itemprop="dateCreated datePublished" datetime="2020-06-19T11:53:15+08:00">2020-06-19</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-06-28 10:51:40" itemprop="dateModified" datetime="2020-06-28T10:51:40+08:00">2020-06-28</time>
+              </span>
 
           
             <span id="/2020/06/19/seq2seq-modeling/" class="post-meta-item leancloud_visitors" data-flag-title="seq2seq modeling" title="阅读次数">
@@ -222,7 +229,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
+          <h2 id="what-is-seq2seq">What is Seq2Seq</h2>
+<h2 id="machine-translation">Machine Translation</h2>
+<h2 id="attention">Attention</h2>
+<h2 id="transformer">Transformer</h2>
 
       
     </div>
@@ -265,10 +275,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-06-18 10:03:50 / 修改时间：10:53:42" itemprop="dateCreated datePublished" datetime="2020-06-18T10:03:50+08:00">2020-06-18</time>
+              <time title="创建时间：2020-06-18 10:03:50" itemprop="dateCreated datePublished" datetime="2020-06-18T10:03:50+08:00">2020-06-18</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-06-28 10:51:38" itemprop="dateModified" datetime="2020-06-28T10:51:38+08:00">2020-06-28</time>
+              </span>
 
           
             <span id="/2020/06/18/semantic%20composition%20representation/" class="post-meta-item leancloud_visitors" data-flag-title="Phrase&Sentence&Document Representation" title="阅读次数">
@@ -303,82 +319,14 @@
 
       
           <p>There are multi-grained semantic units in natural languages such as word, phrase, sentence, document. Since we have seen how to learn a word representation in [link], in this post we will focus on phrase, sentence and document representation learning.</p>
-<h2 id="phrase-representation">Phrase Representation</h2>
-<p>Suppose a phrase <span class="math inline">\(p\)</span> is composed by two words <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span>. The phrase embedding <span class="math inline">\(p\)</span> is learned from its words' embedding, <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span>. Phrase representation methods can be divided into three categories: additive models, multiplicative models and others.</p>
-<h3 id="additive-models">Additive Models</h3>
-<ol type="1">
-<li><p>Vector addition：<span class="math inline">\(\boldsymbol{p}=\boldsymbol{u}+\boldsymbol{v}\)</span></p></li>
-<li><p>Weight the constituents differentially in the addition： <span class="math inline">\(\boldsymbol{p}=\alpha \boldsymbol{u}+\beta \boldsymbol{v}\)</span>（where 𝛼, 𝛽 are scalars）</p></li>
-<li><p>A linear function of the Cartesian product： <span class="math inline">\(\boldsymbol{p}=A \boldsymbol{u}+B \boldsymbol{v}\)</span>（where 𝐴, 𝐵∈<span class="math inline">\(ℝ^{(𝑑×𝑑)}\)</span> are matrices）</p></li>
-</ol>
-<h3 id="multiplicative-models">Multiplicative Models</h3>
-<ol type="1">
-<li><p>Element-wise multiplicative：<span class="math inline">\(\boldsymbol{p}=\boldsymbol{u}\)</span> о <span class="math inline">\(\boldsymbol{v}\)</span></p></li>
-<li><p>A linear function of the tensor product：<span class="math inline">\(\boldsymbol{p}=\boldsymbol{C u} \boldsymbol{v}\)</span>（𝑪∈<span class="math inline">\(ℝ^{(𝑑×𝑑×𝑑)}\)</span> is a tensor of rank 𝑑）</p></li>
-</ol>
-<p><img src="notes-img/11.png" /></p>
-<h3 id="considering-combination-rule">Considering Combination Rule</h3>
-<p>In the above models, all phrases use the same combination rules. However, language is much more complicated. Such as &quot;very good&quot; cannot be simply represented as &quot;apple tree&quot; by using the same linear combination of each single parts. So we should make composition matrices type-specific, which means phrases with different types use different composition matrices.</p>
-<p>Phrases can be divided by type as - Adjective-Noun: e.g., red apple, green tree - Noun-Noun: e.g., tomato noodle, apple tree - Verb-Object: e.g., have fun, eat apples - Other: e.g., take off, put on</p>
-<p>We use different parameters according to different types:</p>
-<ol type="1">
-<li>Additive</li>
-</ol>
-<p><span class="math display">\[\begin{array}{l}
-\boldsymbol{p}=\alpha_{r} \boldsymbol{u}+\beta_{r} \boldsymbol{v} \\
-\boldsymbol{p}=A_{r} \boldsymbol{u}+B_{r} \boldsymbol{v}
-\end{array}\]</span></p>
-<ol start="2" type="1">
-<li>Multiplicative</li>
-</ol>
-<p><span class="math display">\[\boldsymbol{p}=C_{r} \boldsymbol{u} \boldsymbol{v}\]</span></p>
-<ol start="3" type="1">
-<li>Others</li>
-</ol>
-<p><span class="math display">\[\boldsymbol{p}=\alpha_{r} \boldsymbol{u}+\beta_{r} \boldsymbol{v}+\gamma_{r} \boldsymbol{u} \circ \boldsymbol{v}\]</span></p>
-<p>So far we've only used some very simple models that connot fully capture the compositional meanings of phrases, because these models are proposed under the assumption that the meaning of a phrase can be represented by the linear combination of its parts. In addition, most of these models cannot capture the semantics of long text (i.e. a sentence) whose combination rules are much more complicated. Thus neural network is needed.</p>
-<h2 id="sentence-representation">Sentence Representation</h2>
-<h3 id="language-model">Language Model</h3>
-<p>Language Modeling is the task of predicting the upcoming word. It can be formulated as <span class="math inline">\(P\left(w_{n} | w_{1}, w_{2}, \cdots, w_{n-1}\right)\)</span>.</p>
-<p>The most famous language model is <strong>N-gram Model</strong>, which collects how frequent different n-grams are, and use these to predict next word. e.g. 4-gram model: <span class="math inline">\(P\left(w_{j} | \text {never to late to}\right)=\frac{\text {count}\left(\text {too late to } w_{j}\right)}{ \text { count(too late to } )}\)</span>. However, N-gram model needs to store count for all possible n-grams so model size is 𝑂(exp⁡(𝑛)). Another problem is traditional statistical models like N-gram will suffer the sparsity problem, which means it cannot handle new expressions.</p>
-<p>In order to solve these problem, we need to use neural architectures.</p>
-<p>Althought we can simply apply a MLP(Multi Layer Perceptron), but it is inefficient to adapt the change of order and unable to modify a variable length sentence as well. Therefore, the main types of neural network we use are Recurrent Neural Network(RNN) and Convolutional Neural Network(CNN).</p>
-<h3 id="recurrent-neural-network-rnn">Recurrent Neural Network (RNN)</h3>
-<p>RNN introduces a biological concept into neural networks, called sequential memory, which makes RNN can remember the past and its decisions are influenced by what it has learnt from the past. The memory stored in RNNs is changed dynamically during data processing.</p>
-<p>A RNN cell takes the input value <span class="math inline">\(x_i\)</span> and hidden state (memory) of last step <span class="math inline">\(h_{i-1}\)</span> as input, and update the hidden state vector like a single-layer neural network. Then it generates output of this time-step according to the hidden state. The hidden states share the same parameters, so RNN can process sequences with no limited length.</p>
-<p><img src="notes-img/12.png" /></p>
-<p>This picture shows how RNN works as a language model:</p>
-<p><img src="notes-img/13.png" /></p>
-<p>However, the recurrent computation is slow (the time complexity is O(n) ). Besides, it's difficult for RNN models to access information from many steps back.</p>
-<p>Further more, in many applications, like handwriting recognition, speech recognition, and machine translation, when we already have the whole sequence, we want to learn representations and make predictions depending not only on the information from the past, but on the information from the future. That is, we want to have an output depending on the whole input sequence.</p>
-<p>To address this issue, bidirectional RNNs are proposed, which puts two RNNs from opposite directions together. The input sequence is fed in normal time order for one network, and in reverse time order for another network. Then, the outputs of the two networks are concatenated at each time step as the joint hidden states for prediction.</p>
-<p><img src="notes-img/14.png" /></p>
-<p>In order to achieve better performance, similar to the neural network, we can stack multiple layers of Bidirectional RNNs together to form a complex deep bidirectional RNN.</p>
-<p><img src="notes-img/15.png" /></p>
-<p>However, because deep RNNs are quite computationally expensive to train, you don't usually see these stacked up to be more than 3 layers.</p>
-<h3 id="convolutional-neural-network-cnn">Convolutional Neural Network (CNN)</h3>
-<p>A CNN model can be divided into four layers: input layer, convolutional layer, max-pooling layer and non-linear layer.</p>
-<p>In the first layer the input layer, we need to transform words into input representations via word embeddings.</p>
-<p>Next, in the convolution layer we extract feature representation from input representation via a sliding convolving filter. Assuming the input window are <span class="math inline">\(h\)</span> width, each step of convolution operation extracts feature from a <span class="math inline">\(h\)</span>-gram phrase via a dot product operation. Then move to the next <span class="math inline">\(h\)</span>-gram phrase, until it goes through all possible <span class="math inline">\(h\)</span>-gram phrases.</p>
-<p>Then in third step, we apply a max-pooling operation over feature vector and take the maximum value <span class="math inline">\(q\)</span> as the feature corresponding to this particular filter.</p>
-<p>Finally, in the non-linear layer, we put the feature <span class="math inline">\(q\)</span> go through tanh to produce the output.</p>
-<p>As we have seen, the filter with <span class="math inline">\(h\)</span> can extract features of h-gram phrases. Due to the length of phrases is not fixed, it is impossible to capture the features of all phrases with only one filter. Therefore, we can apply multiple filters to capture different n-gram patterns in a sentence as the picture shows.</p>
-<p><img src="notes-img/16.png" /></p>
-<p>CNN has less parameters then RNN and it has better parallelization within sentences. But it can only extracting local and position-invariant features.</p>
-<h2 id="document-representation">Document Representation</h2>
-<p>Both RNN and CNN are not powerful enough to capture information from a long document which consists of hundreds of words.</p>
-<p>One way to solve this is using <strong>Hierarchical Structured Network</strong>.</p>
-<p>First, we split the document into several sentences. Then learn each sentence representation from word representation with an encoder, for example, CNN or RNN. Afterwards, we use another encoder to adaptively encode semantics of sentences and their inherent relations into document representations.</p>
-<p><img src="notes-img/17.png" /></p>
-<p>This model has a hierarchical structure that mirrors the hierarchical structure of documents, and outperforms standard RNN in many document modeling tasks.</p>
-<p>However, the problem of this model is that it treats each word in sentences and each sentence in documents equally. In practice, this is unreasonable. For example, in a sentence, conjunctions usually don't have much information, and in a document, usually the first and the last sentences have the most important information. Therefore, <strong>Hierarchical Attention Network</strong> was proposed.</p>
-<p>Compared to the model mentioned before, HAN introduces two levels of attention mechanisms, corresponding to the two level hierarchy in documents.</p>
-<p>The attention mechanisms enable HAN to attend differentially to more and less important content when constructing the document representation. For those more important parts, they will gain higher weights and for those less important parts, they will gain lower weights. So eventually those important parts of the documents will have a higher impact to the final representation.</p>
-<p><img src="notes-img/18.png" /></p>
-<p>Let's take a look at the Hierarchical Attention Network.</p>
-<p>At the word-level and the sentence-level, we apply the attention mechanism by regarding the word representation and the sentence representation as “values”, and a special context representation as “query”. Thus we get the scores for words and sentences, then we can calculate the sentence representation and the document representation by weighted sum.</p>
-<p><img src="notes-img/19.png" /></p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/06/18/semantic%20composition%20representation/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -428,7 +376,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-06-19 10:11:03" itemprop="dateModified" datetime="2020-06-19T10:11:03+08:00">2020-06-19</time>
+                <time title="修改时间：2020-06-28 10:51:52" itemprop="dateModified" datetime="2020-06-28T10:51:52+08:00">2020-06-28</time>
               </span>
 
           
@@ -469,139 +417,14 @@
 <li>Infer word relation <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">WR(China) − WR(Beijing) ≃ WR(Japan) - WR(Tokyo) </span><br><span class="line">WR(Man) ≃ WR(King) − WR(Queen) + WR(Woman)</span><br><span class="line">WR(Swimming) ≃ WR(Walking) − WR(Walk) + WR(Swim)</span><br></pre></td></tr></table></figure></li>
 </ol>
 <p>Now we start to discuss some ways of obtaining word representations.</p>
-<h2 id="use-a-set-of-related-words">1. Use a set of related words</h2>
-<p>Such as using synonyms and hypernyms to represent a word. e.g. WordNet, a resource containing synonym and hypernym sets.</p>
-<p><img src="notes-img/1.png" /></p>
-<p>However, lots of problems exist:</p>
-<ul>
-<li><p>Missing nuance</p>
-(&quot;proficient&quot;, &quot;good&quot;) are synonyms only in some contexts</li>
-<li><p>Missing new meanings of words</p>
-Apple (fruit → IT company)</li>
-<li>Subjective</li>
-<li>Data sparsity</li>
-<li><p>Requires human labor to create and adapt</p></li>
-</ul>
-<h2 id="one-hot-representation">2. One-Hot Representation</h2>
-<p>Regard words as discrete symbols.</p>
-<p><img src="notes-img/2.png" /></p>
-<ul>
-<li>Vector dimension = # words in vocabulary</li>
-<li>Token with greater ID value doesn't imply more or less important as compared with the token with less ID value.</li>
-</ul>
-<p>The problem is all the vectors are orthogonal. No natural notion of similarity for one-hot vectors.</p>
-<p><span class="math display">\[𝑠𝑖𝑚𝑖𝑙𝑎𝑟𝑖𝑡𝑦(𝑠𝑡𝑎𝑟, 𝑠𝑢𝑛)=(𝑣_{𝑠𝑡𝑎𝑟}, 𝑣_{𝑠𝑢𝑛} )=0\]</span></p>
-<h2 id="represent-word-by-context">3. Represent Word by Context</h2>
-<p>Core idea is that a word's meaning is given by the words that frequently appear close-by, which is one of the most successful ideas of modern statistical NLP.</p>
-<blockquote>
-<p>&quot;You shall know a word by the company it keeps.&quot; (J.R. Firth 1957: 11)</p>
-</blockquote>
-<p>2 ways to achieve this:</p>
-<ul>
-<li>Co-occurrence Counts</li>
-<li>Words Embeddings</li>
-</ul>
-<h3 id="count-based-distributional-representation">Count-based distributional representation</h3>
-<!-- ![](notes-img/3.png) -->
-<h3 id="term-term-matrix">1) Term-Term matrix</h3>
-<p>Measuring how often a word occurs with another.</p>
-<p><span class="math display">\[C(i, j)=\sum_{\Delta x=-m}^{m} \sum_{x=-\Delta x}^{n-\Delta x-1}\left\{\begin{array}{c}
-1, \text {if } \Delta x \neq 0, I(x)=i \text { and } I(x+\Delta x)=j \\
-0, \text { otherwise }
-\end{array}\right.\]</span></p>
-<p>where 𝐧 is the length of sentence 𝑰, 𝐦 is the length of the window.</p>
-<p><img src="notes-img/4.png" /></p>
-<p>This can captures both syntactic and semantic information.</p>
-<p>The shorter the windows, the more syntactic the representation (𝑚∈[1,3]) . The longer the windows, the more semantic the representation (𝑚∈[4,10]) .</p>
-<h3 id="term-document-matrix">2) Term-Document matrix</h3>
-<p>Measuring how often a word occurs in a document. Each document is a count vector in <span class="math inline">\(ℕ^𝑉\)</span> (a column) and each word is a count vector in <span class="math inline">\(ℕ^𝐷\)</span> (a row).</p>
-<p><img src="notes-img/5.png" /></p>
-<p>In large corpora, we expect to see that two words are similar if their vectors are similar and two documents are similar if their vectors are similar.</p>
-<p>Given 2 word vectors 𝑣 and 𝑤, we can use the dot product to measure the similarity. We can normalize the similarity using vector's length which represents the word's frequency in documents.</p>
-<p>Therefore, we often use cosine similarity in practice,</p>
-<p><span class="math display">\[\operatorname{𝑐𝑜𝑠𝑖𝑛𝑒\_𝑠𝑖𝑚𝑖𝑙𝑎𝑟𝑖𝑡𝑦(v,w)}=\frac{v^{*} w}{|v||w|}\]</span></p>
-<h2 id="problems-of-count-based-representation">Problems of Count-Based Representation</h2>
-<ul>
-<li>Increase in size with vocabulary</li>
-<li>Require a lot of storage</li>
-<li>sparsity issues for those less frequent words, which will causes classification models less robust</li>
-</ul>
-<p>We prefer a dense vector to a sparse one, because dense vectors have a better generalization ability and short vectors are easier to use as features in machine learning.</p>
-<p>One way to obtain dense vectors is using SVD (Singular Value Decomposition) discribed as below.</p>
-<p>A 𝑚×𝑛 matrix <span class="math inline">\(𝑀\)</span> can be represented as <span class="math inline">\(𝑀=𝑈Σ𝑉^∗\)</span>, where <span class="math inline">\(𝑈\)</span> is a 𝑚×𝑘 matrix, rows corresponding to original rows, but 𝑘 columns represents a dimension in a new latent space, such that 𝑘 column vectors are orthogonal to each other. <span class="math inline">\(Σ\)</span> is a 𝑘×𝑘 diagonal matrix of singular values expressing the importance of each dimension. <span class="math inline">\(𝑉^∗\)</span> is a 𝑘×𝑛 matrix, columns corresponding to original columns, but 𝑘 rows corresponding to the singular values.</p>
-<p>SVD can be applied to term-term matrix (co-occurrence matrix) to create dense vectors.</p>
-<p>If 𝑘 is not small enough, we can keep the top-k singular values (like 300) to obtain a least-squares approximation to <span class="math inline">\(𝑀\)</span>. In this way, we can reduce word representation dimension.</p>
-<p><img src="notes-img/6.png" /></p>
-<p>The 𝑋 in the diagram is a term-term matrix, and each row of 𝑊 is a 𝑘-dimensional representation of each word w.</p>
-<p>However, SVD do poorly on word analogy and the matrix is high dimensional and very sparse. Besides, the computational cost is <span class="math inline">\(O(V^3)\)</span>, which is hard to accept.</p>
-<h1 id="distributed-word-representation">Distributed Word Representation</h1>
-<p>In non-distributed or local representation, each possible value has a unique representation slot, which requires a lot of memory to process a large database than the distributed approach.</p>
-<p>Whereas with the distributed approach, you could store all that data with just a few memory units: Vehicle class (1= Large SUV, 0.1 = Compact, etc…), Brand, Price, Location, etc.</p>
-<p>There are two main ways to get a distributed word representation:</p>
-<ul>
-<li>Neural Language Model</li>
-<li>Word Embedding</li>
-</ul>
-<h2 id="neural-language-model">Neural Language Model</h2>
-<p>A neural language model is a language model based on neural networks, to learn distributed representations of words.</p>
-<p><img src="notes-img/7.png" /></p>
-<p>Steps: 1. Associate words with distributed vectors 2. Compute the joint probability of word sequences in terms of the feature vectors 3. Optimize the word feature vectors (embedding matrix C) and the parameters of the loss function (the last layer, map matrix W)</p>
-<p>But the problems is that the vocabulary size can be very large, maybe hundreds of thousands of different words. This will causes</p>
-<ul>
-<li>Too many parameters
-<ul>
-<li>Lookup Table (Embedding Matrix)</li>
-<li>Map matrix</li>
-</ul></li>
-<li>Too many computation
-<ul>
-<li>Non-linear operation (Tanh)</li>
-<li>Softmax for each words every step: Suppose there are 100,000 words in the vocabulary, we need to compute 100,000 conditional probabilities every step.</li>
-</ul></li>
-</ul>
-<h2 id="word-embedding">Word Embedding</h2>
-<p>Word2vec uses shallow neural networks that associate words to distributed representations. It can capture many linguistic regularities, such as &quot;king&quot;-&quot;queue&quot;=&quot;man&quot;-&quot;woman&quot;.</p>
-<p>Word2vec can utilize two architectures to produce distributed representations of words: - Continuous bag-of-words (CBOW)</p>
-<p>In CBOW architecture, the model predicts the target word given a window of surrounding context words according to the bag-of-word assumption: The order of context words does not influence the prediction. <span class="math display">\[\max P\left(w_{c} | w_{c-m}, \ldots, w_{c-1}, w_{c+1}, \ldots, w_{c+m}\right)\]</span></p>
-<ul>
-<li><p>Continuous skip-gram</p>
-<p>In skip-gram architecture, the model predicts the context words from the target word (predict one context word each step). <span class="math display">\[\max P\left(w_{c-m}, \ldots, w_{c-1}, w_{c+1}, \ldots, w_{c+m} | w_{c}\right)=\prod_{-m \leq j \leq m,j\neq0} P\left(w_{c+j} | w_{c}\right)\]</span></p></li>
-</ul>
-<p><img src="notes-img/8.png" /></p>
-<p>Word2vec uses a sliding window of a fixed size moving along a sentence. In each window, the middle word is the target word, other words are the context words.</p>
-<p>Given the context words, CBOW predicts the probabilities of the target word. While given a target word, skip-gram predicts the probabilities of the context words.</p>
-<p>We use the softmax function to compute the prediction and use cross-entropy loss function to measure the distribution difference between the prediction and the ground truth. Then optimize the both embedding and map matrices by optimization algorithms.</p>
-<p>However, softmax for all the words every step depends on a huge number of model parameters when the vocabulary size is very large, which is computationally impractical.</p>
-<p>There are two main improvement methods for word2vec: - Negative sampling - Hierarchical softmax</p>
-<h3 id="negative-sampling">Negative sampling</h3>
-<p>The idea is, to only update a small percentage of the weights every step.</p>
-<p>Take skip-gram for example, negative sampling aims to differentiate noisy words from the context words given the target word.</p>
-<p><img src="notes-img/9.png" /></p>
-<p>NCE is essentially an approximation of softmax (taking log), which converts the v-category problem into a bicategory problem. <span class="math inline">\(U(w)\)</span> is the distribution of word frequency. We sample K words (negtive sampling) based on <span class="math inline">\(P_n(w)\)</span> (using 3/4 as an exponential can reduce the impact of overly high frequency stop words on sampling). K often takes from 10~200.</p>
-<h3 id="hierarchical-softmax">Hierarchical softmax</h3>
-<p>The hierarchical softmax groups words by frequency with a Huffman tree, reduces the computation complexity of each step from 𝑉 to log𝑉.</p>
-<p><img src="notes-img/10.png" /></p>
-<p>The leaves on the tree represent all the words in the vocabulary. We consider the process of calculating conditional probabilities as the softmax of dot product of node embedding and word embedding from root to leaf node. (<span class="math inline">\(w_I\)</span> indicates the input word).</p>
-<p>We consider the process of calculating the conditional probability as a serial multiplication of softmax of the vector product of each inner node embedding on the path from the root to the leaf corresponding to the target word. If it go left, the blue part of the formula get 1, else -1.</p>
-<h2 id="beyond-word2vec">Beyond Word2vec</h2>
-<h3 id="subword-information-fasttext">Subword Information: FastText</h3>
-<p>Word2vec assigns a distinct vector to each word, which ignores the internal structure of words, performs bad when vocabulary is large and some words are rare.</p>
-<p>Therefore FastText uses subword to get word embedding. It firstly represent each word as a bag of character n-gram (e.g. 3-gram subword of where is { &lt;wh, whe, her, ere, re&gt;, <where> }) then culculate word embedding as the sum of n-gram embeddings.</p>
-<p><span class="math display">\[v_{w}=\sum_{g \in \mathcal{G}_{w}} z_{g}\]</span></p>
-<p>It can shares the representations across words, but it can also lead to increased complexity due to a larger vocabulary (thus hierarchical softmax is needed).</p>
-<h3 id="global-word-embedding-glove">Global Word Embedding: Glove</h3>
-<p>All the machine learning models above only consider the words within a sliding window but ignore the global statistical information i.e. co-occurrence matrix <span class="math inline">\(X\)</span>.</p>
-<p>Thus the purpose of Glove is producing a vector space with meaningful sub-structure while using global statistical information.</p>
-<p>The original similarity between two word i and j which in context with each other is</p>
-<p><span class="math display">\[\widehat{Q}_{i j}=\frac{\exp \left(u_{j}^{T} v_{i}\right)}{\sum_{w=1}^{W} \exp \left(u_{w}^{T} v_{i}\right)}\]</span></p>
-<p>Due to the denominator is computationally huge, so we discard the normalization and get an approximation</p>
-<p><span class="math display">\[\widehat{Q}_{i j}={\exp \left(u_{j}^{T} v_{i}\right)}\]</span></p>
-<p>The original likelyhood function is</p>
-<p><span class="math display">\[\hat{J}=\sum_{i=1}^{W} \sum_{j=1}^{W} \left(\hat{Q}_{i j}-X_{i j}\right)^{2}\]</span></p>
-<p>Glove transform it into a weighted version and taking log</p>
-<p><span class="math display">\[\hat{J}=\sum_{i=1}^{W} \sum_{j=1}^{W} f\left(X_{i j}\right)\left(\log \widehat{Q}_{i j}-\log X_{i j}\right)^{2}\]</span></p>
-<p>where the weighting factor <span class="math inline">\(f\left(X_{i j}\right)\)</span> is co-occurrence matrix <span class="math inline">\(X_{ij}\)</span>. The reason for taking logarithm is that <span class="math inline">\(X_{ij}\)</span> is usually larger and difficult for optimization.</p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/06/16/word%20representation/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
